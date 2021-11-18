@@ -20,7 +20,9 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("junit:junit:4.13.1")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("com.github.doyaaaaaken:kotlin-csv-jvm:1.2.0")
+	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5")
+	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.12.5")
 }
 
 tasks.withType<KotlinCompile> {

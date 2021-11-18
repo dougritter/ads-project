@@ -8,4 +8,7 @@ class SchedulegenApplication
 
 fun main(args: Array<String>) {
 	runApplication<SchedulegenApplication>(*args)
+
+	val roomsGateway = RoomsGateway()
+	roomsGateway.loadFile()
 }
