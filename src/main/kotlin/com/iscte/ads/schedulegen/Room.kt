@@ -5,5 +5,5 @@ data class Room(
         val name: String,
         val normalCapacity: Int,
         val examCapacity: Int,
-        val features: Array<String> = arrayOf()
+        val features: Map<String, String> = mapOf()
 )
