@@ -4,30 +4,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.util.NoSuchElementException
 
-class ScheduleGenServiceImplementation: ScheduleGenService {
-
-    private fun generateSlotsForOneDay(startTime: LocalTime,
-                                       numberOfSlots: Int,
-                                       slotTime: Int,
-                                       roomName: String): MutableList<Slot> {
-
-        var lastEndTime = startTime
-        val slots = mutableListOf<Slot>()
-
-        for (index in 1..numberOfSlots) {
-            slots.add(Slot(
-                    available = true,
-                    roomName = roomName,
-                    startTime = lastEndTime,
-                    endTime = lastEndTime.plusMinutes(slotTime.toLong())
-            ))
-
-            lastEndTime = slots.last().endTime
-        }
-
-        return slots
-    }
-
+class ScheduleGenServiceImplementation(private val slotGenerator: SlotGenerator) : ScheduleGenService {
 
     override fun generateSchedule(rooms: Array<Room>, classes: Array<StudentClass>): Schedule {
 
@@ -63,7 +40,7 @@ class ScheduleGenServiceImplementation: ScheduleGenService {
                 roomSchedule.days.add(RoomDay(
                         day = day,
                         roomName = room.name,
-                        slots = generateSlotsForOneDay(
+                        slots = slotGenerator.generateSlotsForOneDay(
                                 startTime = LocalTime.parse("08:00"),
                                 numberOfSlots = 30,
                                 slotTime = 30,
