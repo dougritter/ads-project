@@ -1,14 +1,13 @@
 package com.iscte.ads.schedulegen
 
-import org.junit.Assert.assertEquals
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-class ScheduleGenManagerImplementationTest {
+class ScheduleGenServiceImplementationTest {
 
     @Test
-    fun `GIVEN a set up manager WHEN generate schedule is called THEN should return a schedule`() {
+    fun `GIVEN a service WHEN generate schedule is called THEN should return a schedule`() {
         val startDate = LocalDate.now()
         val endDate = LocalDate.now()
 
@@ -48,28 +47,9 @@ class ScheduleGenManagerImplementationTest {
                 )
         )
 
-        val expectedResult = Schedule(arrayOf(
-                Event(
-                        studentClass = classList[0],
-                        startTime = startDate,
-                        endTime = endDate,
-                        dayOfWeek = startDate.dayOfWeek,
-                        room = roomList[1]
-                ),
-                Event(
-                        studentClass = classList[1],
-                        startTime = startDate,
-                        endTime = endDate,
-                        dayOfWeek = startDate.dayOfWeek,
-                        room = roomList[0]
-                )
-        ))
+        val service = ScheduleGenServiceImplementation()
 
-        val fakeScheduleGenService = FakeScheduleGenService(expectedResult)
-        val manager = ScheduleGenManagerImplementation(scheduleGenService = fakeScheduleGenService)
-
-        val result: Schedule = manager.generateSchedule(roomList, classList)
-
-        assertEquals(expectedResult, result)
+        val result = service.generateSchedule(rooms = roomList, classes = classList)
     }
+
 }

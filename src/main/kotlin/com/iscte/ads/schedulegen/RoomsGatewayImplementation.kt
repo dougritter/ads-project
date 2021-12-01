@@ -3,9 +3,20 @@ package com.iscte.ads.schedulegen
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import java.io.BufferedReader
 import java.io.FileReader
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.stream.Collectors
 
-class RoomsGateway() {
+
+class RoomsGatewayImplementation {
+    private val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
+
+    private lateinit var classesList: MutableList<StudentClass>
+    private lateinit var roomsList: MutableList<Room>
+
+    fun getClassesList() = classesList
+
+    fun getRoomsList() = roomsList
 
     private fun mapToClasses(classesList: List<Map<String, String>>): MutableList<StudentClass> {
         val studentClasses = mutableListOf<StudentClass>()
@@ -13,12 +24,26 @@ class RoomsGateway() {
         for (item in classesList) {
             val subscribersCount = item["subscribersCount"].orEmpty()
 
+            var startTime: LocalDateTime? = null
+            var endTime: LocalDateTime? = null
+            val day = item["Dia"].orEmpty().replace("/", "-")
+
+            if (day.isNotEmpty()) {
+                val startTimeString = "$day ${item["startTime"]}"
+                val endTimeString = "$day ${item["endTime"]}"
+
+                startTime = LocalDateTime.parse(startTimeString, formatter)
+                endTime = LocalDateTime.parse(endTimeString, formatter)
+            }
+
             studentClasses.add(StudentClass(
                     course = item["course"].orEmpty(),
                     executionUnit = item["executionUnit"].orEmpty(),
                     shift = item["shift"].orEmpty(),
                     classIdentifier = item["classIdentifier"].orEmpty(),
-                    subscribersCount =  if (subscribersCount.isNotEmpty()) subscribersCount.toInt() else 0
+                    subscribersCount =  if (subscribersCount.isNotEmpty()) subscribersCount.toInt() else 0,
+                    startTime = startTime,
+                    endTime = endTime
             ))
         }
 
@@ -33,6 +58,9 @@ class RoomsGateway() {
         result = result.replaceFirst("Turma", "classIdentifier")
         result = result.replaceFirst("Inscritos no turno (no 1º semestre é baseado em estimativas)",
                 "subscribersCount")
+
+        result = result.replaceFirst("Início", "startTime")
+        result = result.replaceFirst("Fim", "endTime")
         result = result.replace(",", "-")
         result = result.replace(";", ",")
 
@@ -86,7 +114,7 @@ class RoomsGateway() {
     }
 
     fun loadFile() {
-        var roomsList: List<Map<String, String>>?
+        var roomsMap: List<Map<String, String>>?
         var classes: List<Map<String, String>>?
 
         FileReader("src/main/resources/rooms.csv").use { fileReader ->
@@ -96,9 +124,9 @@ class RoomsGateway() {
 
                 val contentsCSV = normalizeRoomsCSV(contents)
 
-                roomsList = csvReader().readAllWithHeader(contentsCSV)
-                val rooms = mapToRooms(roomsList!!)
-                print(rooms)
+                roomsMap = csvReader().readAllWithHeader(contentsCSV)
+                roomsList = mapToRooms(roomsMap!!)
+                print(roomsList)
             }
         }
 
@@ -110,7 +138,7 @@ class RoomsGateway() {
                 val contentsCSV = normalizeClassesCSV(contents)
 
                 classes = csvReader().readAllWithHeader(contentsCSV)
-                val studentClasses = mapToClasses(classes!!)
+                classesList = mapToClasses(classes!!)
                 print(classes)
             }
         }
