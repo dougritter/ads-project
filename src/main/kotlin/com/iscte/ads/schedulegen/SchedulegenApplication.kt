@@ -16,4 +16,5 @@ fun main(args: Array<String>) {
 	val scheduleManager = ScheduleGenManagerImplementation(scheduleGenService = scheduleService)
 
 	val result = scheduleManager.generateSchedule(roomsGateway.getRoomsList().toTypedArray(), roomsGateway.getClassesList().toTypedArray())
+	print(result)
 }

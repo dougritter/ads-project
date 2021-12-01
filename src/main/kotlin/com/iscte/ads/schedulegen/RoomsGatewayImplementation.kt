@@ -126,7 +126,7 @@ class RoomsGatewayImplementation {
 
                 roomsMap = csvReader().readAllWithHeader(contentsCSV)
                 roomsList = mapToRooms(roomsMap!!)
-                print(roomsList)
+//                print(roomsList)
             }
         }
 
@@ -139,7 +139,7 @@ class RoomsGatewayImplementation {
 
                 classes = csvReader().readAllWithHeader(contentsCSV)
                 classesList = mapToClasses(classes!!)
-                print(classes)
+//                print(classes)
             }
         }
    }

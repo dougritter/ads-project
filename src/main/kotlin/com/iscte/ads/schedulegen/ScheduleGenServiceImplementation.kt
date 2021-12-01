@@ -1,36 +1,165 @@
 package com.iscte.ads.schedulegen
 
-import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.LocalTime
+import java.util.NoSuchElementException
+
+data class Slot(
+        val available: Boolean,
+        val roomName: String,
+        val startTime: LocalTime,
+        val endTime: LocalTime,
+        val classIdentifier:  String? = null
+)
+
+data class RoomDay(
+        val day: LocalDate,
+        val roomName: String,
+        val slots: MutableList<Slot>
+)
+
+data class RoomSchedule(
+        val room: Room,
+        val days: MutableList<RoomDay>
+)
 
 class ScheduleGenServiceImplementation: ScheduleGenService {
+
+    private fun generateSlotsForOneDay(startTime: LocalTime,
+                                       numberOfSlots: Int,
+                                       slotTime: Int,
+                                       roomName: String): MutableList<Slot> {
+
+        var lastEndTime = startTime
+        val slots = mutableListOf<Slot>()
+
+        for (index in 1..numberOfSlots) {
+            slots.add(Slot(
+                    available = true,
+                    roomName = roomName,
+                    startTime = lastEndTime,
+                    endTime = lastEndTime.plusMinutes(slotTime.toLong())
+            ))
+
+            lastEndTime = slots.last().endTime
+        }
+
+        return slots
+    }
+
+
     override fun generateSchedule(rooms: Array<Room>, classes: Array<StudentClass>): Schedule {
-        val roomsMatrix = mutableListOf<MutableList<Room>>()
+
+        // The baseline of this algorithm uses two data structures
+        // A list of Rooms with their schedules for each day
+        // A list of events (unique classes) with their rooms
+
+        // find the first date of class
+        // find the last date of class
+        // find all days of classes for the schedule
+        // fill a list of slots for each day of class with all rooms for each
+
+        // Find days with classes
+        //
+        val daysOfClasses = mutableListOf<LocalDate>()
+        for (studentClass in classes) {
+            studentClass.startTime?.apply {
+                val uniqueDate = this.toLocalDate()
+                if (!daysOfClasses.contains(uniqueDate)) {
+                    daysOfClasses.add(uniqueDate)
+                }
+            }
+        }
+
+//        print("ScheduleGenService - found days of all classes: ${daysOfClasses.count()} days for ${classes.count()} classes")
+
+        val allRoomsSchedule = mutableListOf<RoomSchedule>()
+
+        for (room in rooms) {
+            val roomSchedule = RoomSchedule(room = room, days = mutableListOf())
+
+            for (day in daysOfClasses) {
+                roomSchedule.days.add(RoomDay(
+                        day = day,
+                        roomName = room.name,
+                        slots = generateSlotsForOneDay(
+                                startTime = LocalTime.parse("08:00"),
+                                numberOfSlots = 30,
+                                slotTime = 30,
+                                roomName = room.name
+                        )
+                ))
+            }
+
+            allRoomsSchedule.add(roomSchedule)
+        }
+//        print("ScheduleGenService - generated rooms schedule: $allRoomsSchedule")
 
         val events = mutableListOf<Event>()
 
+        // for each class, search for a candidate room
         for (studentClass in classes) {
             var candidateRoom: Room? = null
+            var candidateStartSlot: Slot? = null
+            var candidateEndSlot: Slot? = null
 
-            for (room in roomsMatrix.first()) {
-                if (candidateRoom != null) {
-                    if (room.normalCapacity >= studentClass.subscribersCount
-                            && room.normalCapacity < candidateRoom.normalCapacity) {
-                        candidateRoom = room
+            for (roomSchedule in allRoomsSchedule) {
+
+                val startSlot: Slot
+                val endSlot: Slot
+                // for each room, search for the corresponding slots
+                if (studentClass.startTime != null) {
+                    try {
+                        val dailySchedule = roomSchedule.days.first { it.day == studentClass.startTime.toLocalDate() }
+
+                        startSlot = dailySchedule.slots.first { it.startTime == studentClass.startTime.toLocalTime() }
+                        endSlot = dailySchedule.slots.first { it.endTime == studentClass.endTime!!.toLocalTime() }
+
+                    } catch (exception: NoSuchElementException) {
+                        continue
                     }
-                } else if (room.normalCapacity >= studentClass.subscribersCount) {
-                    candidateRoom = room
+
+                    // verify if start slot and end slot are both available
+                    val startAndEndSlotsAreAvailable = startSlot.available && endSlot.available
+
+                    // simple logic that currently only checks for room capacity
+                    if (startAndEndSlotsAreAvailable) {
+                        if (candidateRoom != null) {
+                            if (roomSchedule.room.normalCapacity >= studentClass.subscribersCount
+                                    && roomSchedule.room.normalCapacity < candidateRoom.normalCapacity) {
+                                candidateRoom = roomSchedule.room
+                                candidateStartSlot = startSlot
+                                candidateEndSlot = endSlot
+                            }
+                        } else if (roomSchedule.room.normalCapacity >= studentClass.subscribersCount) {
+                            candidateRoom = roomSchedule.room
+                            candidateStartSlot = startSlot
+                            candidateEndSlot = endSlot
+                        }
+                    }
                 }
             }
 
             candidateRoom?.apply {
+
+                val dayInTheList = allRoomsSchedule.find {
+                    it.room.name == candidateRoom.name
+                }?.days?.find {
+                    it.day == studentClass.startTime?.toLocalDate()
+                }
+
+                dayInTheList?.slots?.add(dayInTheList.slots.indexOf(candidateStartSlot), candidateStartSlot?.copy(available = false)!!)
+                dayInTheList?.slots?.add(dayInTheList.slots.indexOf(candidateEndSlot), candidateEndSlot?.copy(available = false)!!)
+
                 events.add(Event(
                         studentClass = studentClass,
-                        startTime = LocalDate.now(),
-                        endTime = LocalDate.now(),
-                        dayOfWeek = LocalDate.now().dayOfWeek,
+                        startTime = studentClass.startTime,
+                        endTime = studentClass.endTime,
+                        dayOfWeek = studentClass.startTime?.dayOfWeek,
                         room = this
                 ))
+
+//                print("ScheduleGenService - added event to schedule: ${events.last()}")
             }
         }
 
