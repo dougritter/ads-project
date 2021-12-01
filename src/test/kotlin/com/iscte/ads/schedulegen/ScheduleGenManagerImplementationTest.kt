@@ -9,8 +9,8 @@ class ScheduleGenManagerImplementationTest {
 
     @Test
     fun `GIVEN a set up manager WHEN generate schedule is called THEN should return a schedule`() {
-        val startDate = LocalDate.now()
-        val endDate = LocalDate.now()
+        val startDate = LocalDateTime.now()
+        val endDate = LocalDateTime.now()
 
         val classList = arrayOf(
                 StudentClass(
