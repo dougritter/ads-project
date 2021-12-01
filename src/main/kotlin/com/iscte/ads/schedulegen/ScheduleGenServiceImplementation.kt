@@ -4,25 +4,6 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.util.NoSuchElementException
 
-data class Slot(
-        val available: Boolean,
-        val roomName: String,
-        val startTime: LocalTime,
-        val endTime: LocalTime,
-        val classIdentifier:  String? = null
-)
-
-data class RoomDay(
-        val day: LocalDate,
-        val roomName: String,
-        val slots: MutableList<Slot>
-)
-
-data class RoomSchedule(
-        val room: Room,
-        val days: MutableList<RoomDay>
-)
-
 class ScheduleGenServiceImplementation: ScheduleGenService {
 
     private fun generateSlotsForOneDay(startTime: LocalTime,
@@ -148,8 +129,13 @@ class ScheduleGenServiceImplementation: ScheduleGenService {
                     it.day == studentClass.startTime?.toLocalDate()
                 }
 
-                dayInTheList?.slots?.add(dayInTheList.slots.indexOf(candidateStartSlot), candidateStartSlot?.copy(available = false)!!)
-                dayInTheList?.slots?.add(dayInTheList.slots.indexOf(candidateEndSlot), candidateEndSlot?.copy(available = false)!!)
+                dayInTheList?.slots?.add(dayInTheList.slots.indexOf(candidateStartSlot), candidateStartSlot?.copy(
+                        available = false,
+                        classIdentifier = studentClass.classIdentifier)!!)
+                dayInTheList?.slots?.add(dayInTheList.slots.indexOf(candidateEndSlot), candidateEndSlot?.copy(
+                        available = false,
+                        classIdentifier = studentClass.classIdentifier)!!
+                )
 
                 events.add(Event(
                         studentClass = studentClass,
