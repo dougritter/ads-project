@@ -1,9 +1,10 @@
 package com.iscte.ads.schedulegen
 
+import org.springframework.stereotype.Service
 import java.time.LocalDate
-import java.time.LocalTime
 
-class RoomsScheduleGeneratorImplementation(private val dayStartTime: LocalTime,
+@Service
+class RoomsScheduleGeneratorImplementation(private val dayStartTime: DayStartTimeConfig,
                                            private val slotGenerator: SlotGenerator) : RoomsScheduleGenerator {
 
     override fun generateRoomsSchedule(rooms: Array<Room>, daysOfClasses: MutableList<LocalDate>): MutableList<RoomSchedule> {
@@ -17,7 +18,7 @@ class RoomsScheduleGeneratorImplementation(private val dayStartTime: LocalTime,
                         day = day,
                         roomName = room.name,
                         slots = slotGenerator.generateSlotsForOneDay(
-                                startTime = dayStartTime,
+                                startTime = dayStartTime.firstTimeOfTheDay(),
                                 numberOfSlots = 30,
                                 slotTime = 30,
                                 roomName = room.name

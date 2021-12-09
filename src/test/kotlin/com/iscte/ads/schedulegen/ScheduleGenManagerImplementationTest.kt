@@ -2,8 +2,10 @@ package com.iscte.ads.schedulegen
 
 import org.junit.Assert.assertEquals
 import org.junit.jupiter.api.Test
+import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 
+@Service
 class ScheduleGenManagerImplementationTest {
 
     @Test

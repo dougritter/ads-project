@@ -1,13 +1,14 @@
 package com.iscte.ads.schedulegen
 
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
+import org.springframework.stereotype.Service
 import java.io.BufferedReader
 import java.io.FileReader
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.stream.Collectors
 
-
+@Service
 class RoomsGatewayImplementation {
     private val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
 
@@ -114,6 +115,7 @@ class RoomsGatewayImplementation {
     }
 
     fun loadFile() {
+        print("load file requested")
         var roomsMap: List<Map<String, String>>?
         var classes: List<Map<String, String>>?
 
@@ -126,7 +128,7 @@ class RoomsGatewayImplementation {
 
                 roomsMap = csvReader().readAllWithHeader(contentsCSV)
                 roomsList = mapToRooms(roomsMap!!)
-//                print(roomsList)
+                print("finished loading rooms - ${roomsList.size} rooms")
             }
         }
 
@@ -139,7 +141,7 @@ class RoomsGatewayImplementation {
 
                 classes = csvReader().readAllWithHeader(contentsCSV)
                 classesList = mapToClasses(classes!!)
-//                print(classes)
+                print("finished loading classes - ${classesList.size} classes")
             }
         }
    }

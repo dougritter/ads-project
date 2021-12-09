@@ -1,7 +1,9 @@
 package com.iscte.ads.schedulegen
 
+import org.springframework.stereotype.Service
 import java.time.LocalTime
 
+@Service
 class SlotGeneratorImplementation: SlotGenerator {
 
     override fun generateSlotsForOneDay(startTime: LocalTime,

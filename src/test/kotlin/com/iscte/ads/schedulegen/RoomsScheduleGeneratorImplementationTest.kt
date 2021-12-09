@@ -36,7 +36,7 @@ class RoomsScheduleGeneratorImplementationTest {
         )
 
         val roomsScheduleGenerator = RoomsScheduleGeneratorImplementation(
-                dayStartTime = LocalTime.parse("08:00"),
+                dayStartTime = DayStartTimeConfig(),
                 slotGenerator = fakeSlotGenerator
         )
 

@@ -1,8 +1,10 @@
 package com.iscte.ads.schedulegen
 
+import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.util.NoSuchElementException
 
+@Service
 class ScheduleGenServiceImplementation(private val roomScheduleGenerator: RoomsScheduleGenerator) : ScheduleGenService {
 
     override fun generateSchedule(rooms: Array<Room>, classes: Array<StudentClass>): Schedule {
