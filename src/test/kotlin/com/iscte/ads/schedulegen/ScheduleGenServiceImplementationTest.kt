@@ -47,7 +47,7 @@ class ScheduleGenServiceImplementationTest {
                 )
         )
 
-        val service = ScheduleGenServiceImplementation(SlotGeneratorImplementation())
+        val service = ScheduleGenServiceImplementation(FakeRoomScheduleGenerator())
 
         val result = service.generateSchedule(rooms = roomList, classes = classList)
     }

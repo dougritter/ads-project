@@ -1,21 +1,15 @@
 package com.iscte.ads.schedulegen
 
 import java.time.LocalDate
-import java.time.LocalTime
 import java.util.NoSuchElementException
 
-class ScheduleGenServiceImplementation(private val slotGenerator: SlotGenerator) : ScheduleGenService {
+class ScheduleGenServiceImplementation(private val roomScheduleGenerator: RoomsScheduleGenerator) : ScheduleGenService {
 
     override fun generateSchedule(rooms: Array<Room>, classes: Array<StudentClass>): Schedule {
 
         // The baseline of this algorithm uses two data structures
         // A list of Rooms with their schedules for each day
         // A list of events (unique classes) with their rooms
-
-        // find the first date of class
-        // find the last date of class
-        // find all days of classes for the schedule
-        // fill a list of slots for each day of class with all rooms for each
 
         // Find days with classes
         //
@@ -31,8 +25,8 @@ class ScheduleGenServiceImplementation(private val slotGenerator: SlotGenerator)
 
 //        print("ScheduleGenService - found days of all classes: ${daysOfClasses.count()} days for ${classes.count()} classes")
 
-        val allRoomsSchedule = generateRoomsSchedule(rooms, daysOfClasses)
-        //        print("ScheduleGenService - generated rooms schedule: $allRoomsSchedule")
+        val allRoomsSchedule = roomScheduleGenerator.generateRoomsSchedule(rooms, daysOfClasses)
+//        print("ScheduleGenService - generated rooms schedule: $allRoomsSchedule")
 
         val events = mutableListOf<Event>()
 
@@ -108,29 +102,5 @@ class ScheduleGenServiceImplementation(private val slotGenerator: SlotGenerator)
         }
 
         return Schedule(events = events.toTypedArray())
-    }
-
-    private fun generateRoomsSchedule(rooms: Array<Room>, daysOfClasses: MutableList<LocalDate>): MutableList<RoomSchedule> {
-        val allRoomsSchedule = mutableListOf<RoomSchedule>()
-
-        for (room in rooms) {
-            val roomSchedule = RoomSchedule(room = room, days = mutableListOf())
-
-            for (day in daysOfClasses) {
-                roomSchedule.days.add(RoomDay(
-                        day = day,
-                        roomName = room.name,
-                        slots = slotGenerator.generateSlotsForOneDay(
-                                startTime = LocalTime.parse("08:00"),
-                                numberOfSlots = 30,
-                                slotTime = 30,
-                                roomName = room.name
-                        )
-                ))
-            }
-
-            allRoomsSchedule.add(roomSchedule)
-        }
-        return allRoomsSchedule
     }
 }

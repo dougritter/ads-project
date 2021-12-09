@@ -2,7 +2,6 @@ package com.iscte.ads.schedulegen
 
 import org.junit.Assert.assertEquals
 import org.junit.jupiter.api.Test
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 class ScheduleGenManagerImplementationTest {
