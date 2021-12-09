@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
 	id("org.springframework.boot") version "2.5.6"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	id("java")
 	kotlin("jvm") version "1.5.31"
 	kotlin("plugin.spring") version "1.5.31"
 }
@@ -27,13 +28,19 @@ dependencies {
     implementation("org.junit.jupiter:junit-jupiter:5.7.0")
 }
 
-tasks.withType<KotlinCompile> {
-	kotlinOptions {
-		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "11"
+tasks {
+	compileKotlin {
+		kotlinOptions {
+			freeCompilerArgs = listOf("-Xjsr305=strict")
+			jvmTarget = "11"
+		}
 	}
-}
 
-tasks.withType<Test> {
-	useJUnitPlatform()
+	test {
+		useJUnitPlatform()
+	}
+
+	bootJar {
+		archiveFileName.set("app.jar")
+	}
 }
