@@ -10,7 +10,6 @@ plugins {
 
 group = "com.iscte.ads"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
 	mavenCentral()
@@ -26,6 +25,11 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5")
 	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.12.5")
     implementation("org.junit.jupiter:junit-jupiter:5.7.0")
+}
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 tasks {
