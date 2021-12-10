@@ -22,6 +22,6 @@ class ScheduleController(private val scheduleManager: ScheduleGenManagerImplemen
 
         val totalTime = ChronoUnit.MILLIS.between(dateStart, LocalDateTime.now())
         print("schedule created - returning result in $totalTime ms")
-        return result.events.first().toString()
+        return result.toString()
     }
 }
