@@ -36,7 +36,7 @@ tasks {
 	compileKotlin {
 		kotlinOptions {
 			freeCompilerArgs = listOf("-Xjsr305=strict")
-			jvmTarget = "11"
+			jvmTarget = "1.8"
 		}
 	}
 
