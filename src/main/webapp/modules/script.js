@@ -44,7 +44,6 @@ function handleFiles(event) {
         console.log("rooms were parsed out");
 
         if (classesCSV != null && roomsCSV != null) {
-//            $('#generateSchedule').prop('disabled', false);
             configureUIToGenerateSchedule(roomsCSV, classesCSV)
         }
 
@@ -60,7 +59,6 @@ function handleFiles(event) {
             console.log("classes were parsed out");
 
             if (classesCSV != null && roomsCSV != null) {
-//              $('#generateSchedule').prop('disabled', false);
                 configureUIToGenerateSchedule(roomsCSV, classesCSV)
             }
     }
@@ -88,7 +86,7 @@ function configureUIToGenerateSchedule(roomsCSV, classesCSV) {
         .then(resp => resp.json())
         .then(data => {
             console.log("generated schedule")
-            console.log(data)
+            console.log(data[0])
         })
     });
 

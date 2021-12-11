@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter
 import java.util.stream.Collectors
 
 @Service
-class RoomsGatewayImplementation {
+class RoomsGatewayImplementation(val objectConverter: ObjectConverter) {
     private val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
 
     private lateinit var classesList: MutableList<StudentClass>
@@ -51,42 +51,6 @@ class RoomsGatewayImplementation {
         return studentClasses
     }
 
-    private fun normalizeClassesCSV(csv: String): String {
-        var result = csv
-        result = result.replaceFirst("Curso", "course")
-        result = result.replaceFirst("Unidade de execução", "executionUnit")
-        result = result.replaceFirst("Turno", "shift")
-        result = result.replaceFirst("Turma", "classIdentifier")
-        result = result.replaceFirst("Inscritos no turno (no 1º semestre é baseado em estimativas)",
-                "subscribersCount")
-
-        result = result.replaceFirst("Início", "startTime")
-        result = result.replaceFirst("Fim", "endTime")
-        result = result.replace(",", "-")
-        result = result.replace(";", ",")
-
-        return result
-    }
-
-    private fun normalizeRoomsCSV(csv: String): String {
-        var result = csv
-        result = result.replaceFirst("Edificio", "building")
-        result = result.replaceFirst("Nome sala", "name")
-        result = result.replaceFirst("Capacidade Normal", "normalCapacity")
-        result = result.replaceFirst("Capacidade Exame", "examCapacity")
-        result = result.replace(";", ",")
-
-        // Edificio,Nome sala,Capacidade Normal,Capacidade Exame,Nº caracteristicas,Anfiteatro aulas,Apoio tecnico eventos,
-        // Arq 1,Arq 2,Arq 3,Arq 4,Arq 5,Arq 6,Arq 9,BYOD (Bring Your Own Device),
-        // Focus Group,Horário sala visível portal público,Laboratório de Arquitectura de Computadores I,
-        // Laboratório de Arquitectura de Computadores II,Laboratório de Bases de Engenharia,Laboratório de Electrónica,
-        // Laboratório de Informática,Laboratório de Jornalismo,Laboratório de Redes de Computadores I,
-        // Laboratório de Redes de Computadores II,Laboratório de Telecomunicações,Sala Aulas Mestrado,Sala Aulas Mestrado Plus,
-        // Sala NEE,Sala Provas,Sala Reunião,Sala de Arquitectura,Sala de Aulas normal,videoconferencia,Átrio
-
-        return result
-    }
-
     private fun mapToRooms(roomsList: List<Map<String, String>>): MutableList<Room> {
         val rooms = mutableListOf<Room>()
 
@@ -115,13 +79,13 @@ class RoomsGatewayImplementation {
     }
 
     fun convertFromRoomsCsv(roomsCsv: String): MutableList<Room> {
-        val contentsCSV = normalizeRoomsCSV(roomsCsv)
+        val contentsCSV = objectConverter.normalizeRoomsCSV(roomsCsv)
         val roomsMap = csvReader().readAllWithHeader(contentsCSV)
         return mapToRooms(roomsMap)
     }
 
     fun convertFromClassesCsv(classesCsv: String): MutableList<StudentClass> {
-        val contentsCSV = normalizeClassesCSV(classesCsv)
+        val contentsCSV = objectConverter.normalizeClassesCSV(classesCsv)
         val classes = csvReader().readAllWithHeader(contentsCSV)
         return mapToClasses(classes)
     }
@@ -136,7 +100,7 @@ class RoomsGatewayImplementation {
                 val contents = reader.lines()
                         .collect(Collectors.joining(System.lineSeparator()))
 
-                val contentsCSV = normalizeRoomsCSV(contents)
+                val contentsCSV = objectConverter.normalizeRoomsCSV(contents)
 
                 roomsMap = csvReader().readAllWithHeader(contentsCSV)
                 roomsList = mapToRooms(roomsMap!!)
@@ -149,7 +113,7 @@ class RoomsGatewayImplementation {
                 val contents = reader.lines()
                         .collect(Collectors.joining(System.lineSeparator()))
 
-                val contentsCSV = normalizeClassesCSV(contents)
+                val contentsCSV = objectConverter.normalizeClassesCSV(contents)
 
                 classes = csvReader().readAllWithHeader(contentsCSV)
                 classesList = mapToClasses(classes!!)
@@ -157,4 +121,8 @@ class RoomsGatewayImplementation {
             }
         }
    }
+
+    fun convertToJson(arrayOfEvents: Array<Event>): String {
+        return objectConverter.convertToJson(arrayOfEvents)
+    }
 }

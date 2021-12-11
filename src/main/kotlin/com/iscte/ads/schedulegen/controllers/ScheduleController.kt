@@ -38,7 +38,7 @@ class ScheduleController(private val scheduleManager: ScheduleGenManagerImplemen
                 .registerModule(JavaTimeModule())
         mapper.findAndRegisterModules()
 
-        return mapper.writeValueAsString(scheduleManager.generateSchedule(
+        return roomsGateway.convertToJson(scheduleManager.generateSchedule(
                 roomsGateway.convertFromRoomsCsv(csvUpload.rooms).toTypedArray(),
                 roomsGateway.convertFromClassesCsv(csvUpload.classes).toTypedArray())
                 .events)
