@@ -1,5 +1,8 @@
 package com.iscte.ads.schedulegen.controllers
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.iscte.ads.schedulegen.RoomsGatewayImplementation
 import com.iscte.ads.schedulegen.ScheduleGenManagerImplementation
 import org.springframework.web.bind.annotation.*
@@ -29,11 +32,19 @@ class ScheduleController(private val scheduleManager: ScheduleGenManagerImplemen
     @PostMapping("/upload-csv")
     fun uploadCsv(@RequestBody csvUpload: CsvUpload): String? {
         print("received request to upload-csv")
-        print(csvUpload)
-        return """
-            {
-                "response" : "returning something OK to upload-csv endpoint"
-            }
-        """
+
+        val rooms = roomsGateway.convertFromRoomsCsv(csvUpload.rooms)
+        val classes = roomsGateway.convertFromClassesCsv(csvUpload.classes)
+
+        val result = scheduleManager.generateSchedule(
+                rooms.toTypedArray(),
+                classes.toTypedArray())
+
+        val mapper = ObjectMapper()
+                .registerModule(Jdk8Module())
+                .registerModule(JavaTimeModule())
+        mapper.findAndRegisterModules()
+
+        return mapper.writeValueAsString(result.events)
     }
 }

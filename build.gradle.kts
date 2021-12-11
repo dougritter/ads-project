@@ -24,6 +24,8 @@ dependencies {
 	implementation("com.github.doyaaaaaken:kotlin-csv-jvm:1.2.0")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.12.5")
 	implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.12.5")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
     implementation("org.junit.jupiter:junit-jupiter:5.7.0")
 }
 

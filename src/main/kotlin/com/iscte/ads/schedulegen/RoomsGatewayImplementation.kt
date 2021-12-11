@@ -114,6 +114,18 @@ class RoomsGatewayImplementation {
         return rooms
     }
 
+    fun convertFromRoomsCsv(roomsCsv: String): MutableList<Room> {
+        val contentsCSV = normalizeRoomsCSV(roomsCsv)
+        val roomsMap = csvReader().readAllWithHeader(contentsCSV)
+        return mapToRooms(roomsMap)
+    }
+
+    fun convertFromClassesCsv(classesCsv: String): MutableList<StudentClass> {
+        val contentsCSV = normalizeClassesCSV(classesCsv)
+        val classes = csvReader().readAllWithHeader(contentsCSV)
+        return mapToClasses(classes)
+    }
+
     fun loadFile() {
         print("load file requested")
         var roomsMap: List<Map<String, String>>?
