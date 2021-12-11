@@ -2,11 +2,12 @@ package com.iscte.ads.schedulegen.controllers
 
 import com.iscte.ads.schedulegen.RoomsGatewayImplementation
 import com.iscte.ads.schedulegen.ScheduleGenManagerImplementation
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.ResponseBody
-import org.springframework.web.bind.annotation.RestController
+import netscape.javascript.JSObject
+import org.springframework.web.bind.annotation.*
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
+
+data class CsvUpload(val rooms: String, val classes: String)
 
 @RestController
 class ScheduleController(private val scheduleManager: ScheduleGenManagerImplementation,
@@ -24,5 +25,16 @@ class ScheduleController(private val scheduleManager: ScheduleGenManagerImplemen
         val totalTime = ChronoUnit.MILLIS.between(dateStart, LocalDateTime.now())
         print("schedule created - returning result in $totalTime ms")
         return result.toString()
+    }
+
+    @PostMapping("/upload-csv")
+    fun uploadCsv(@RequestBody csvUpload: CsvUpload): String? {
+        print("received request to upload-csv")
+        print(csvUpload)
+        return """
+            {
+                "response" : "returning something OK to upload-csv endpoint"
+            }
+        """
     }
 }

@@ -40,16 +40,14 @@ function handleFiles(event) {
         var csv = event.target.result;
 
         const parsed = parse(csv)
-        roomsCSV = parsed
-        console.log(parsed);
+        roomsCSV = stringify(parsed)
+        console.log("rooms were parsed out");
 
         if (classesCSV != null && roomsCSV != null) {
-            $('#generateSchedule').prop('disabled', false);
+//            $('#generateSchedule').prop('disabled', false);
+            configureUIToGenerateSchedule(roomsCSV, classesCSV)
         }
-//      const stringified = stringify(parsed)
 
-//      $('#result').empty();
-//      $('#result').html(stringified);
     }
 
     var classesReader = new FileReader();
@@ -58,31 +56,40 @@ function handleFiles(event) {
             var csv = event.target.result;
 
             const parsed = parse(csv)
-            classesCSV = parsed
-            console.log(parsed);
+            classesCSV = stringify(parsed)
+            console.log("classes were parsed out");
 
             if (classesCSV != null && roomsCSV != null) {
-              $('#generateSchedule').prop('disabled', false);
+//              $('#generateSchedule').prop('disabled', false);
+                configureUIToGenerateSchedule(roomsCSV, classesCSV)
             }
-
-//            const stringified = stringify(parsed)
-
-//            $('#result').empty();
-//            $('#result').html(stringified);
     }
 }
 
-//fetch('http://localhost:3000/users', {
-//   method: "POST",
-//   headers: {
-//      "Content-Type": "application/json",
-//      "Accept": "application/json"
-//   },
-//   body: JSON.stringify({
-//      name: name,
-//   })
-//})
-//.then(resp => resp.json())
-//.then(data => {
-//   // do something here
-//})
+function configureUIToGenerateSchedule(roomsCSV, classesCSV) {
+    if ($('#generateSchedule').prop('disabled') == false) {
+        console.log("already set up UI")
+        return
+    }
+
+    $('#generateSchedule').click(function(){
+        fetch('http://localhost:8080/upload-csv', {
+           method: "POST",
+           headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json"
+           },
+           body: JSON.stringify({
+              rooms: roomsCSV, classes: classesCSV
+           })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            console.log("generated schedule")
+            console.log(data)
+        })
+    });
+
+    $('#generateSchedule').prop('disabled', false);
+}
+
