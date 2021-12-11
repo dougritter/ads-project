@@ -33,18 +33,14 @@ class ScheduleController(private val scheduleManager: ScheduleGenManagerImplemen
     fun uploadCsv(@RequestBody csvUpload: CsvUpload): String? {
         print("received request to upload-csv")
 
-        val rooms = roomsGateway.convertFromRoomsCsv(csvUpload.rooms)
-        val classes = roomsGateway.convertFromClassesCsv(csvUpload.classes)
-
-        val result = scheduleManager.generateSchedule(
-                rooms.toTypedArray(),
-                classes.toTypedArray())
-
         val mapper = ObjectMapper()
                 .registerModule(Jdk8Module())
                 .registerModule(JavaTimeModule())
         mapper.findAndRegisterModules()
 
-        return mapper.writeValueAsString(result.events)
+        return mapper.writeValueAsString(scheduleManager.generateSchedule(
+                roomsGateway.convertFromRoomsCsv(csvUpload.rooms).toTypedArray(),
+                roomsGateway.convertFromClassesCsv(csvUpload.classes).toTypedArray())
+                .events)
     }
 }

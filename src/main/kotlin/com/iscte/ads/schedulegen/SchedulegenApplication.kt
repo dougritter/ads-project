@@ -6,13 +6,7 @@ import org.springframework.stereotype.Controller
 
 @Controller
 @SpringBootApplication
-class SchedulegenApplication(roomsGateway: RoomsGatewayImplementation) {
-
-	init {
-	    roomsGateway.loadFile()
-	}
-
-}
+class SchedulegenApplication()
 
 fun main(args: Array<String>) {
 	runApplication<SchedulegenApplication>(*args)
