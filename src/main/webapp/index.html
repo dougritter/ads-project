@@ -5,9 +5,18 @@
     </head>
     <body>
     <p>Welcome to Schedule Generator</p>
+    <br/>
+    <p>Instructions to generate a schedule</p>
+    <p>1: Select and upload both Rooms and Classes file in CSV format</p>
+    <br/>
 
     <form class="upload">
-        <input type="file" name="uploadFile" accept=".csv" required />
+        <br/>
+        <p>Select and upload a CSV file containing the Rooms</p>
+        <input type="file" name="uploadRooms" accept=".csv" required />
+        <br/>
+        <p>Select and upload a CSV file containing the Classes</p>
+        <input type="file" name="uploadClasses" accept=".csv" required />
         <br/><br/>
         <input type="submit" />
     </form>
@@ -15,8 +24,11 @@
     <script type="module"> import { parse } from './modules/csv.js' </script>
     <script type="module" src="./modules/script.js"></script>
 
-    <p id="file-info"></p>
+    <p id="rooms-file-info"></p>
+    <p id="classes-file-info"></p>
     <br/><br/>
+    <button type="button" id="generateSchedule" disabled="disabled">Generate schedule</button>
+
     <p id="result"></p>
 
     </body>
