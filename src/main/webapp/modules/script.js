@@ -72,8 +72,10 @@ function configureUIToGenerateSchedule(roomsCSV, classesCSV) {
         return
     }
 
+    let url = window.location.href + "upload-csv"
+
     $('#generateSchedule').click(function(){
-        fetch('http://localhost:8080/upload-csv', {
+        fetch(url, {
            method: "POST",
            headers: {
               "Content-Type": "application/json",
