@@ -2,7 +2,6 @@ package com.iscte.ads.schedulegen.controllers
 
 import com.iscte.ads.schedulegen.RoomsGatewayImplementation
 import com.iscte.ads.schedulegen.ScheduleGenManagerImplementation
-import netscape.javascript.JSObject
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
