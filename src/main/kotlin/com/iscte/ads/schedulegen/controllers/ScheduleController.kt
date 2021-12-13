@@ -22,9 +22,12 @@ class ScheduleController(private val scheduleManager: ScheduleGenManagerImplemen
                 .registerModule(JavaTimeModule())
         mapper.findAndRegisterModules()
 
-        return roomsGateway.convertToJson(scheduleManager.generateSchedule(
-                roomsGateway.convertFromRoomsCsv(csvUpload.rooms).toTypedArray(),
-                roomsGateway.convertFromClassesCsv(csvUpload.classes).toTypedArray())
-                .events)
+        val roomsArray = roomsGateway.convertFromRoomsCsv(csvUpload.rooms).toTypedArray()
+        val classesArray = roomsGateway.convertFromClassesCsv(csvUpload.classes).toTypedArray()
+
+        val scheduleResult = scheduleManager.generateSchedule(roomsArray, classesArray).events
+        val scheduleJson = roomsGateway.convertToJson(scheduleResult)
+
+        return scheduleJson
     }
 }
