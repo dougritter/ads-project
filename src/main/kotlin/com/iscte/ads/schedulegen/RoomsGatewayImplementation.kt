@@ -12,13 +12,6 @@ import java.util.stream.Collectors
 class RoomsGatewayImplementation(val objectConverter: ObjectConverter) {
     private val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss")
 
-    private lateinit var classesList: MutableList<StudentClass>
-    private lateinit var roomsList: MutableList<Room>
-
-    fun getClassesList() = classesList
-
-    fun getRoomsList() = roomsList
-
     private fun mapToClasses(classesList: List<Map<String, String>>): MutableList<StudentClass> {
         val studentClasses = mutableListOf<StudentClass>()
 
@@ -89,38 +82,6 @@ class RoomsGatewayImplementation(val objectConverter: ObjectConverter) {
         val classes = csvReader().readAllWithHeader(contentsCSV)
         return mapToClasses(classes)
     }
-
-    fun loadFile() {
-        print("load file requested")
-        var roomsMap: List<Map<String, String>>?
-        var classes: List<Map<String, String>>?
-
-        FileReader("src/main/resources/rooms.csv").use { fileReader ->
-            BufferedReader(fileReader).use { reader ->
-                val contents = reader.lines()
-                        .collect(Collectors.joining(System.lineSeparator()))
-
-                val contentsCSV = objectConverter.normalizeRoomsCSV(contents)
-
-                roomsMap = csvReader().readAllWithHeader(contentsCSV)
-                roomsList = mapToRooms(roomsMap!!)
-                print("finished loading rooms - ${roomsList.size} rooms")
-            }
-        }
-
-        FileReader("src/main/resources/classes.csv").use { fileReader ->
-            BufferedReader(fileReader).use { reader ->
-                val contents = reader.lines()
-                        .collect(Collectors.joining(System.lineSeparator()))
-
-                val contentsCSV = objectConverter.normalizeClassesCSV(contents)
-
-                classes = csvReader().readAllWithHeader(contentsCSV)
-                classesList = mapToClasses(classes!!)
-                print("finished loading classes - ${classesList.size} classes")
-            }
-        }
-   }
 
     fun convertToJson(arrayOfEvents: Array<Event>): String {
         return objectConverter.convertToJson(arrayOfEvents)
