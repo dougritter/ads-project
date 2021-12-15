@@ -88,6 +88,33 @@ function appendData(data) {
     }
 }
 
+function arrayToTable(header, data) {
+    var table = $('<table></table>');
+    var headerRow = $('<tr></tr>');
+
+    for (var i = 0; i < header.length; i++) {
+        headerRow.append($('<td>'+ header[i] + '</td>'));
+    }
+    tableRow.append(header)
+
+    for (var i = 0; i < data.length; i++) {
+        var row = $('<tr></tr>');
+        var claz = data[i].studentClass
+
+        var cells = [claz.course, claz.executionUnit, claz.shift, claz.classIdentifier, claz.subscribersCount,
+         'turnos com capac. superior...', 'turno com inscrições superiores...', data[i].dayOfWeek,
+         formatTime(data[i].startTime), formatTime(data[i].startTime), formatDate(data[i].endTime),
+          'Características da sala pedida...', data[i].room.name, data[i].room.normalCapacity, data[i].room.normalCapacity, data[i].room.features];
+
+        for (var j =0; j < cells.length; j++) {
+            row.append($('<td>'+cells[j]+'</td>'));
+        }
+        table.append(row);
+    }
+
+    return table;
+}
+
 function configureUIToGenerateSchedule(header, roomsCSV, classesCSV) {
     if ($('#generateSchedule').prop('disabled') == false) {
         console.log("already set up UI")
@@ -110,13 +137,11 @@ function configureUIToGenerateSchedule(header, roomsCSV, classesCSV) {
         .then(resp => resp.json())
         .then(data => {
             console.log("generated schedule")
-            var headerLine = ""
-            for (var i = 0; i < header.length; i++) {
-                headerLine += " "+header[i]
-            }
 
-            $('#scheduleResult').text(headerLine)
-            appendData(data)
+            $('body').append(arrayToTable(header, data));
+
+//            $('#scheduleResult').text(headerLine)
+//            appendData(data)
             console.log(data)
         })
     });
