@@ -111,6 +111,9 @@ function configureUIToGenerateSchedule(header, roomsCSV, classesCSV) {
 
     let url = window.location.href + "upload-csv"
 
+    var paramOverbooking = $('#paramPercentage').val() != '' ? $('#paramPercentage').val() : 10
+    var paramMatchFeature = $('#paramMatchFeature').val() == "on" ? true : false
+
     $('#generateSchedule').click(function(){
         fetch(url, {
            method: "POST",
@@ -119,7 +122,7 @@ function configureUIToGenerateSchedule(header, roomsCSV, classesCSV) {
               "Accept": "application/json"
            },
            body: JSON.stringify({
-              rooms: roomsCSV, classes: classesCSV
+              rooms: roomsCSV, classes: classesCSV, qualityParams: { overbookingPercentage: paramOverbooking, matchForRequiredFeature: paramMatchFeature }
            })
         })
         .then(resp => resp.json())

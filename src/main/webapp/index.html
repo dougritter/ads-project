@@ -28,13 +28,22 @@
         <title>Schedule Generator</title>
     </head>
     <body>
-    <p>Welcome to Schedule Generator</p>
+    <h2> Welcome to Schedule Generator</h2>
     <br/>
-    <p>Instructions to generate a schedule</p>
-    <p>1: Select both Rooms and Classes file in CSV format</p>
-    <p>2: Click at "Submit" and see the info of both files</p>
-    <p>3: Click at "Generate Schedule" so that the schedule is generated</p>
+    <h2>Instructions to generate a schedule</h2>
+    <p>1) Configure the desired quality parameters</p>
+    <p>2) Select both Rooms and Classes file in CSV format</p>
+    <p>3) Click at "Submit" and see the info of both files</p>
+    <p>4) Click at "Generate Schedule" so that the schedule is generated</p>
     <br/>
+
+    <h2>Quality parameters:</h2>
+    <p>Overbooking allowed percentage (0 to 100)</p>
+    <input type="text" id="paramPercentage" placeholder="10 as default">
+    <br/><br/>
+    <input type="checkbox" id="paramMatchFeature">
+    <label for="paramMatchFeature">Match requested room feature</label>
+    <br/><br/>
 
     <form class="upload">
         <p>Select and upload a CSV file containing the Rooms</p>

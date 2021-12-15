@@ -1,5 +1,6 @@
 package com.iscte.ads.schedulegen
 
+import com.iscte.ads.schedulegen.config.QualityParams
 import com.iscte.ads.schedulegen.room.Room
 import com.iscte.ads.schedulegen.schedule.Event
 import com.iscte.ads.schedulegen.schedule.Schedule
@@ -76,7 +77,7 @@ class ScheduleGenManagerImplementationTest {
         val fakeScheduleGenService = FakeScheduleGenService(expectedResult)
         val manager = ScheduleGenManagerImplementation(scheduleGenService = fakeScheduleGenService)
 
-        val result: Schedule = manager.generateSchedule(roomList, classList)
+        val result: Schedule = manager.generateSchedule(roomList, classList, QualityParams(10, true))
 
         assertEquals(expectedResult, result)
     }

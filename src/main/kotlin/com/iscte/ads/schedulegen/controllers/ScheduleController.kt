@@ -3,11 +3,14 @@ package com.iscte.ads.schedulegen.controllers
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.iscte.ads.schedulegen.config.QualityParams
 import com.iscte.ads.schedulegen.room.RoomsGatewayImplementation
 import com.iscte.ads.schedulegen.schedule.ScheduleGenManagerImplementation
 import org.springframework.web.bind.annotation.*
 
-data class CsvUpload(val rooms: String, val classes: String)
+data class CsvUpload(val rooms: String,
+                     val classes: String,
+                     val qualityParams: QualityParams)
 
 @RestController
 class ScheduleController(private val scheduleManager: ScheduleGenManagerImplementation,
@@ -15,7 +18,7 @@ class ScheduleController(private val scheduleManager: ScheduleGenManagerImplemen
 
     @PostMapping("/upload-csv")
     fun uploadCsv(@RequestBody csvUpload: CsvUpload): String? {
-        print("received request to upload-csv")
+        print("received request to upload-csv with params ${csvUpload.qualityParams}")
 
         val mapper = ObjectMapper()
                 .registerModule(Jdk8Module())
@@ -25,7 +28,7 @@ class ScheduleController(private val scheduleManager: ScheduleGenManagerImplemen
         val roomsArray = roomsGateway.convertFromRoomsCsv(csvUpload.rooms).toTypedArray()
         val classesArray = roomsGateway.convertFromClassesCsv(csvUpload.classes).toTypedArray()
 
-        val scheduleResult = scheduleManager.generateSchedule(roomsArray, classesArray).events
+        val scheduleResult = scheduleManager.generateSchedule(roomsArray, classesArray, csvUpload.qualityParams).events
         val scheduleJson = roomsGateway.convertToJson(scheduleResult)
 
         return scheduleJson

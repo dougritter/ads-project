@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class ScheduleGenManagerImplementation(val scheduleGenService: ScheduleGenService): ScheduleGenManager {
-    override fun generateSchedule(roomsArray: Array<Room>, classArray: Array<StudentClass>): Schedule {
-        return scheduleGenService.generateSchedule(roomsArray, classArray, QualityParams(10, true))
+    override fun generateSchedule(roomsArray: Array<Room>, classArray: Array<StudentClass>, qualityParams: QualityParams): Schedule {
+        return scheduleGenService.generateSchedule(roomsArray, classArray, qualityParams)
     }
 }
