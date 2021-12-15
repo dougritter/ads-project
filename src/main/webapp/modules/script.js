@@ -31,6 +31,7 @@ function handleFiles(event) {
     $('#rooms-file-info').append(getFileInfo(roomsFile))
     $('#classes-file-info').append(getFileInfo(classesFile))
 
+    var header = null
     var roomsCSV = null
     var classesCSV = null
 
@@ -44,9 +45,8 @@ function handleFiles(event) {
         console.log("rooms were parsed out");
 
         if (classesCSV != null && roomsCSV != null) {
-            configureUIToGenerateSchedule(roomsCSV, classesCSV)
+            configureUIToGenerateSchedule(header, roomsCSV, classesCSV)
         }
-
     }
 
     var classesReader = new FileReader();
@@ -55,16 +55,40 @@ function handleFiles(event) {
             var csv = event.target.result;
 
             const parsed = parse(csv)
+            header = parsed[0][0].split(';')
             classesCSV = stringify(parsed)
             console.log("classes were parsed out");
 
             if (classesCSV != null && roomsCSV != null) {
-                configureUIToGenerateSchedule(roomsCSV, classesCSV)
+                configureUIToGenerateSchedule(header, roomsCSV, classesCSV)
             }
     }
 }
 
-function configureUIToGenerateSchedule(roomsCSV, classesCSV) {
+function formatTime(time) {
+    return time[3] + ':' + time[4]
+}
+
+function formatDate(date) {
+    return date[2] + '/' + date[1] + '/' + date[0]
+}
+
+function appendData(data) {
+    var mainContainer = document.getElementById("scheduleResult");
+    for (var i = 0; i < data.length; i++) {
+        var div = document.createElement("div");
+        var claz = data[i].studentClass
+        div.innerHTML = claz.course + ' ' + claz.executionUnit + ' ' + claz.shift + ' ' + claz.classIdentifier +
+          ' '+ claz.subscribersCount + ' ' + 'turnos com capac. superior...' + ' ' + 'turno com inscrições superiores...' +
+            ' '+ data[i].dayOfWeek + ' ' + formatTime(data[i].startTime) + ' ' + formatTime(data[i].startTime) +
+            ' '+ formatDate(data[i].startTime) + ' ' + 'Características da sala pedida...' + ' ' + data[i].room.name +
+            ' '+ data[i].room.normalCapacity + ' ' + data[i].room.normalCapacity + ' ' + data[i].room.features;
+
+        mainContainer.appendChild(div);
+    }
+}
+
+function configureUIToGenerateSchedule(header, roomsCSV, classesCSV) {
     if ($('#generateSchedule').prop('disabled') == false) {
         console.log("already set up UI")
         return
@@ -86,10 +110,18 @@ function configureUIToGenerateSchedule(roomsCSV, classesCSV) {
         .then(resp => resp.json())
         .then(data => {
             console.log("generated schedule")
-            console.log(data[0])
+            var headerLine = ""
+            for (var i = 0; i < header.length; i++) {
+                headerLine += " "+header[i]
+            }
+
+            $('#scheduleResult').text(headerLine)
+            appendData(data)
+            console.log(data)
         })
     });
 
     $('#generateSchedule').prop('disabled', false);
 }
+
 

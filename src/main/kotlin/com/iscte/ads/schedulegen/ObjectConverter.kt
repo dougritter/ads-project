@@ -16,7 +16,7 @@ class ObjectConverter {
     }
 
     fun convertToJson(arrayOfEvents: Array<Event>): String {
-        return revertClassesCSV(mapper.writeValueAsString(arrayOfEvents))
+        return mapper.writeValueAsString(arrayOfEvents)
     }
 
     fun normalizeClassesCSV(csv: String): String {
