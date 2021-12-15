@@ -94,7 +94,7 @@ function arrayToTable(header, data) {
         var cells = [claz.course, claz.executionUnit, claz.shift, claz.classIdentifier, claz.subscribersCount,
          'turnos com capac. superior...', 'turno com inscrições superiores...', data[i].dayOfWeek,
          formatTime(data[i].startTime), formatTime(data[i].startTime), formatDate(data[i].endTime),
-          'Características da sala pedida...', data[i].room.name, data[i].room.normalCapacity, data[i].room.features];
+          claz.requestedFeature, data[i].room.name, data[i].room.normalCapacity, data[i].room.features];
 
         for (var j =0; j < cells.length; j++) {
             row.append($('<td>'+cells[j]+'</td>'));

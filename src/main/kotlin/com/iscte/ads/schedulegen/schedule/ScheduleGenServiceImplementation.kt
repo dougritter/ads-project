@@ -1,5 +1,6 @@
 package com.iscte.ads.schedulegen.schedule
 
+import com.iscte.ads.schedulegen.config.QualityParams
 import com.iscte.ads.schedulegen.room.Room
 import com.iscte.ads.schedulegen.room.RoomsScheduleGenerator
 import org.springframework.stereotype.Service
@@ -9,7 +10,7 @@ import java.util.NoSuchElementException
 @Service
 class ScheduleGenServiceImplementation(private val roomScheduleGenerator: RoomsScheduleGenerator) : ScheduleGenService {
 
-    override fun generateSchedule(rooms: Array<Room>, classes: Array<StudentClass>): Schedule {
+    override fun generateSchedule(rooms: Array<Room>, classes: Array<StudentClass>, quality: QualityParams): Schedule {
 
         // The baseline of this algorithm uses two data structures
         // A list of Rooms with their schedules for each day
@@ -62,13 +63,13 @@ class ScheduleGenServiceImplementation(private val roomScheduleGenerator: RoomsS
                     // simple logic that currently only checks for room capacity
                     if (startAndEndSlotsAreAvailable) {
                         if (candidateRoom != null) {
-                            if (roomSchedule.room.normalCapacity >= studentClass.subscribersCount
+                            if (matchesWithQualityParams(quality, roomSchedule.room, studentClass)
                                     && roomSchedule.room.normalCapacity < candidateRoom.normalCapacity) {
                                 candidateRoom = roomSchedule.room
                                 candidateStartSlot = startSlot
                                 candidateEndSlot = endSlot
                             }
-                        } else if (roomSchedule.room.normalCapacity >= studentClass.subscribersCount) {
+                        } else if (matchesWithQualityParams(quality, roomSchedule.room, studentClass)) {
                             candidateRoom = roomSchedule.room
                             candidateStartSlot = startSlot
                             candidateEndSlot = endSlot
@@ -106,5 +107,23 @@ class ScheduleGenServiceImplementation(private val roomScheduleGenerator: RoomsS
         }
 
         return Schedule(events = events.toTypedArray())
+    }
+
+    private fun matchesWithQualityParams(quality: QualityParams, room: Room, studentClass: StudentClass): Boolean {
+        val maxTotalOverbooking = (studentClass.subscribersCount + (studentClass.subscribersCount * (quality.overbookingPercentage/100)))
+
+        // checking for maximum overbooking
+        if (room.normalCapacity < maxTotalOverbooking) {
+            return false
+        }
+
+        // checking for the requested feature
+        if (quality.matchForRequiredFeature && studentClass.requestedFeature != null) {
+            if (!room.features.containsKey(studentClass.requestedFeature) || room.features[studentClass.requestedFeature]!!.isEmpty()) {
+                return false
+            }
+        }
+
+        return true
     }
 }
