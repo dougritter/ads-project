@@ -65,54 +65,42 @@ function handleFiles(event) {
     }
 }
 
+function formatNumber(number) {
+    return number === '0' ? '00' : number
+}
+
 function formatTime(time) {
-    return time[3] + ':' + time[4]
+    return formatNumber(time[3]) + ':' + formatNumber(time[4])
 }
 
 function formatDate(date) {
     return date[2] + '/' + date[1] + '/' + date[0]
 }
 
-function appendData(data) {
-    var mainContainer = document.getElementById("scheduleResult");
-    for (var i = 0; i < data.length; i++) {
-        var div = document.createElement("div");
-        var claz = data[i].studentClass
-        div.innerHTML = claz.course + ' ' + claz.executionUnit + ' ' + claz.shift + ' ' + claz.classIdentifier +
-          ' '+ claz.subscribersCount + ' ' + 'turnos com capac. superior...' + ' ' + 'turno com inscrições superiores...' +
-            ' '+ data[i].dayOfWeek + ' ' + formatTime(data[i].startTime) + ' ' + formatTime(data[i].startTime) +
-            ' '+ formatDate(data[i].startTime) + ' ' + 'Características da sala pedida...' + ' ' + data[i].room.name +
-            ' '+ data[i].room.normalCapacity + ' ' + data[i].room.normalCapacity + ' ' + data[i].room.features;
-
-        mainContainer.appendChild(div);
-    }
-}
-
 function arrayToTable(header, data) {
-    var table = $('<table></table>');
     var headerRow = $('<tr></tr>');
 
     for (var i = 0; i < header.length; i++) {
-        headerRow.append($('<td>'+ header[i] + '</td>'));
+        headerRow.append($('<th>'+ header[i] + '</th>'));
     }
-    tableRow.append(header)
+    $('#events').append(headerRow)
 
-    for (var i = 0; i < data.length; i++) {
+    var lengthToShow = data.length > 100 ? 100 : data.length
+
+    for (var i = 0; i < lengthToShow; i++) {
         var row = $('<tr></tr>');
         var claz = data[i].studentClass
 
         var cells = [claz.course, claz.executionUnit, claz.shift, claz.classIdentifier, claz.subscribersCount,
          'turnos com capac. superior...', 'turno com inscrições superiores...', data[i].dayOfWeek,
          formatTime(data[i].startTime), formatTime(data[i].startTime), formatDate(data[i].endTime),
-          'Características da sala pedida...', data[i].room.name, data[i].room.normalCapacity, data[i].room.normalCapacity, data[i].room.features];
+          'Características da sala pedida...', data[i].room.name, data[i].room.normalCapacity, data[i].room.features];
 
         for (var j =0; j < cells.length; j++) {
             row.append($('<td>'+cells[j]+'</td>'));
         }
-        table.append(row);
+        $('#events').append(row);
     }
-
-    return table;
 }
 
 function configureUIToGenerateSchedule(header, roomsCSV, classesCSV) {
@@ -138,11 +126,12 @@ function configureUIToGenerateSchedule(header, roomsCSV, classesCSV) {
         .then(data => {
             console.log("generated schedule")
 
-            $('body').append(arrayToTable(header, data));
+            arrayToTable(header, data)
+//            $('body').append(arrayToTable(header, data));
 
 //            $('#scheduleResult').text(headerLine)
 //            appendData(data)
-            console.log(data)
+//            console.log(data)
         })
     });
 
