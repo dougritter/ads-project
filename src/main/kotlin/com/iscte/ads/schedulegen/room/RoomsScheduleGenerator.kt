@@ -1,4 +1,4 @@
-package com.iscte.ads.schedulegen
+package com.iscte.ads.schedulegen.room
 
 import java.time.LocalDate
 

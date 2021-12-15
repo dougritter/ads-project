@@ -1,5 +1,9 @@
 package com.iscte.ads.schedulegen
 
+import com.iscte.ads.schedulegen.config.DayStartTimeConfig
+import com.iscte.ads.schedulegen.room.Room
+import com.iscte.ads.schedulegen.room.RoomsScheduleGeneratorImplementation
+import com.iscte.ads.schedulegen.schedule.Slot
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.time.LocalDate

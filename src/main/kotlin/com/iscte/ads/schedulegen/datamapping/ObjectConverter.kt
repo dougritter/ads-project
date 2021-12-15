@@ -1,8 +1,9 @@
-package com.iscte.ads.schedulegen
+package com.iscte.ads.schedulegen.datamapping
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.iscte.ads.schedulegen.schedule.Event
 import org.springframework.stereotype.Service
 
 @Service

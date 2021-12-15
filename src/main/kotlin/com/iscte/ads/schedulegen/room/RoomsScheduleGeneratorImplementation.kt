@@ -1,5 +1,7 @@
-package com.iscte.ads.schedulegen
+package com.iscte.ads.schedulegen.room
 
+import com.iscte.ads.schedulegen.config.DayStartTimeConfig
+import com.iscte.ads.schedulegen.schedule.SlotGenerator
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 

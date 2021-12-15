@@ -1,5 +1,8 @@
 package com.iscte.ads.schedulegen
 
+import com.iscte.ads.schedulegen.room.Room
+import com.iscte.ads.schedulegen.schedule.ScheduleGenServiceImplementation
+import com.iscte.ads.schedulegen.schedule.StudentClass
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -19,7 +22,8 @@ class ScheduleGenServiceImplementationTest {
                         classIdentifier = "MEI-PL-A1",
                         subscribersCount = 30,
                         startTime = LocalDateTime.now(),
-                        endTime = LocalDateTime.now()
+                        endTime = LocalDateTime.now(),
+                        requestedFeature = null
                 ),
                 StudentClass(
                         course = "MEI",
@@ -28,7 +32,8 @@ class ScheduleGenServiceImplementationTest {
                         classIdentifier = "MEI-PL-A1",
                         subscribersCount = 29,
                         startTime = LocalDateTime.now(),
-                        endTime = LocalDateTime.now()
+                        endTime = LocalDateTime.now(),
+                        requestedFeature = null
                 )
         )
 

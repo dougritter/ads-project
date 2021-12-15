@@ -1,4 +1,4 @@
-package com.iscte.ads.schedulegen
+package com.iscte.ads.schedulegen.schedule
 
 import java.time.LocalDateTime
 
@@ -9,5 +9,6 @@ data class StudentClass(
         val classIdentifier: String,
         val subscribersCount: Int,
         val startTime: LocalDateTime? = null,
-        val endTime: LocalDateTime? = null
+        val endTime: LocalDateTime? = null,
+        val requestedFeature: String? = null
 )

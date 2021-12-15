@@ -1,5 +1,7 @@
 package com.iscte.ads.schedulegen
 
+import com.iscte.ads.schedulegen.schedule.Slot
+import com.iscte.ads.schedulegen.schedule.SlotGenerator
 import java.time.LocalTime
 
 class FakeSlotGenerator: SlotGenerator {

@@ -1,5 +1,6 @@
-package com.iscte.ads.schedulegen
+package com.iscte.ads.schedulegen.schedule
 
+import com.iscte.ads.schedulegen.room.Room
 import java.time.DayOfWeek
 import java.time.LocalDateTime
 

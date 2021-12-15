@@ -1,4 +1,4 @@
-package com.iscte.ads.schedulegen
+package com.iscte.ads.schedulegen.config
 
 import org.springframework.stereotype.Service
 import java.time.LocalTime

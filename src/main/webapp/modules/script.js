@@ -127,11 +127,6 @@ function configureUIToGenerateSchedule(header, roomsCSV, classesCSV) {
             console.log("generated schedule")
 
             arrayToTable(header, data)
-//            $('body').append(arrayToTable(header, data));
-
-//            $('#scheduleResult').text(headerLine)
-//            appendData(data)
-//            console.log(data)
         })
     });
 

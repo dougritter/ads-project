@@ -1,4 +1,6 @@
-package com.iscte.ads.schedulegen
+package com.iscte.ads.schedulegen.schedule
+
+import com.iscte.ads.schedulegen.room.Room
 
 interface ScheduleGenService {
     fun generateSchedule(rooms: Array<Room>, classes: Array<StudentClass>): Schedule

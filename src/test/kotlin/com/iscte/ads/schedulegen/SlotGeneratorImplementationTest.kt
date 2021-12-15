@@ -1,5 +1,7 @@
 package com.iscte.ads.schedulegen
 
+import com.iscte.ads.schedulegen.schedule.Slot
+import com.iscte.ads.schedulegen.schedule.SlotGeneratorImplementation
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.time.LocalTime

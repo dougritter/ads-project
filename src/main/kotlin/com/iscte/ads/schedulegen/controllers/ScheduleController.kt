@@ -3,8 +3,8 @@ package com.iscte.ads.schedulegen.controllers
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.iscte.ads.schedulegen.RoomsGatewayImplementation
-import com.iscte.ads.schedulegen.ScheduleGenManagerImplementation
+import com.iscte.ads.schedulegen.room.RoomsGatewayImplementation
+import com.iscte.ads.schedulegen.schedule.ScheduleGenManagerImplementation
 import org.springframework.web.bind.annotation.*
 
 data class CsvUpload(val rooms: String, val classes: String)

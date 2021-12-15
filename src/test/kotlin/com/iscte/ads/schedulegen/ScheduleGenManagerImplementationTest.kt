@@ -1,5 +1,10 @@
 package com.iscte.ads.schedulegen
 
+import com.iscte.ads.schedulegen.room.Room
+import com.iscte.ads.schedulegen.schedule.Event
+import com.iscte.ads.schedulegen.schedule.Schedule
+import com.iscte.ads.schedulegen.schedule.ScheduleGenManagerImplementation
+import com.iscte.ads.schedulegen.schedule.StudentClass
 import org.junit.Assert.assertEquals
 import org.junit.jupiter.api.Test
 import org.springframework.stereotype.Service
@@ -21,7 +26,8 @@ class ScheduleGenManagerImplementationTest {
                         classIdentifier = "MEI-PL-A1",
                         subscribersCount = 30,
                         startTime = LocalDateTime.now(),
-                        endTime = LocalDateTime.now()
+                        endTime = LocalDateTime.now(),
+                        requestedFeature = null
                 ),
                 StudentClass(
                         course = "MEI",
@@ -30,7 +36,8 @@ class ScheduleGenManagerImplementationTest {
                         classIdentifier = "MEI-PL-A1",
                         subscribersCount = 29,
                         startTime = LocalDateTime.now(),
-                        endTime = LocalDateTime.now()
+                        endTime = LocalDateTime.now(),
+                        requestedFeature = null
                 )
         )
 

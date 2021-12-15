@@ -1,12 +1,12 @@
-package com.iscte.ads.schedulegen
+package com.iscte.ads.schedulegen.room
 
 import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
+import com.iscte.ads.schedulegen.schedule.Event
+import com.iscte.ads.schedulegen.datamapping.ObjectConverter
+import com.iscte.ads.schedulegen.schedule.StudentClass
 import org.springframework.stereotype.Service
-import java.io.BufferedReader
-import java.io.FileReader
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.stream.Collectors
 
 @Service
 class RoomsGatewayImplementation(val objectConverter: ObjectConverter) {
@@ -17,6 +17,7 @@ class RoomsGatewayImplementation(val objectConverter: ObjectConverter) {
 
         for (item in classesList) {
             val subscribersCount = item["subscribersCount"].orEmpty()
+            val requestedFeature = item["Características da sala pedida para a aula"].orEmpty()
 
             var startTime: LocalDateTime? = null
             var endTime: LocalDateTime? = null
@@ -37,7 +38,8 @@ class RoomsGatewayImplementation(val objectConverter: ObjectConverter) {
                     classIdentifier = item["classIdentifier"].orEmpty(),
                     subscribersCount =  if (subscribersCount.isNotEmpty()) subscribersCount.toInt() else 0,
                     startTime = startTime,
-                    endTime = endTime
+                    endTime = endTime,
+                    requestedFeature = requestedFeature.ifEmpty { null }
             ))
         }
 

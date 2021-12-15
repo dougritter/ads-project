@@ -1,5 +1,7 @@
-package com.iscte.ads.schedulegen
+package com.iscte.ads.schedulegen.schedule
 
+import com.iscte.ads.schedulegen.room.Room
+import com.iscte.ads.schedulegen.room.RoomsScheduleGenerator
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 import java.util.NoSuchElementException
