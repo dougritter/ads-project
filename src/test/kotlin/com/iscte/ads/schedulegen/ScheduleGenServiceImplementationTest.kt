@@ -2,6 +2,7 @@ package com.iscte.ads.schedulegen
 
 import com.iscte.ads.schedulegen.config.QualityParams
 import com.iscte.ads.schedulegen.room.Room
+import com.iscte.ads.schedulegen.schedule.QualityHandler
 import com.iscte.ads.schedulegen.schedule.ScheduleGenServiceImplementation
 import com.iscte.ads.schedulegen.schedule.StudentClass
 import org.junit.jupiter.api.Test
@@ -53,7 +54,7 @@ class ScheduleGenServiceImplementationTest {
                 )
         )
 
-        val service = ScheduleGenServiceImplementation(FakeRoomScheduleGenerator())
+        val service = ScheduleGenServiceImplementation(FakeRoomScheduleGenerator(), QualityHandler())
 
         val result = service.generateSchedule(rooms = roomList, classes = classList, quality = QualityParams(10, true))
     }

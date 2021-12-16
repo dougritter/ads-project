@@ -8,7 +8,8 @@ import java.time.LocalDate
 import java.util.NoSuchElementException
 
 @Service
-class ScheduleGenServiceImplementation(private val roomScheduleGenerator: RoomsScheduleGenerator) : ScheduleGenService {
+class ScheduleGenServiceImplementation(private val roomScheduleGenerator: RoomsScheduleGenerator,
+                                       private val qualityHandler: QualityHandler) : ScheduleGenService {
 
     override fun generateSchedule(rooms: Array<Room>, classes: Array<StudentClass>, quality: QualityParams): Schedule {
 
@@ -63,13 +64,13 @@ class ScheduleGenServiceImplementation(private val roomScheduleGenerator: RoomsS
                     // simple logic that currently only checks for room capacity
                     if (startAndEndSlotsAreAvailable) {
                         if (candidateRoom != null) {
-                            if (matchesWithQualityParams(quality, roomSchedule.room, studentClass)
+                            if (qualityHandler.matchesWithQualityParams(quality, roomSchedule.room, studentClass)
                                     && roomSchedule.room.normalCapacity < candidateRoom.normalCapacity) {
                                 candidateRoom = roomSchedule.room
                                 candidateStartSlot = startSlot
                                 candidateEndSlot = endSlot
                             }
-                        } else if (matchesWithQualityParams(quality, roomSchedule.room, studentClass)) {
+                        } else if (qualityHandler.matchesWithQualityParams(quality, roomSchedule.room, studentClass)) {
                             candidateRoom = roomSchedule.room
                             candidateStartSlot = startSlot
                             candidateEndSlot = endSlot
@@ -107,23 +108,5 @@ class ScheduleGenServiceImplementation(private val roomScheduleGenerator: RoomsS
         }
 
         return Schedule(events = events.toTypedArray())
-    }
-
-    private fun matchesWithQualityParams(quality: QualityParams, room: Room, studentClass: StudentClass): Boolean {
-        val maxTotalOverbooking = (studentClass.subscribersCount + (studentClass.subscribersCount * (quality.overbookingPercentage/100)))
-
-        // checking for maximum overbooking
-        if (room.normalCapacity < maxTotalOverbooking) {
-            return false
-        }
-
-        // checking for the requested feature
-        if (quality.matchForRequiredFeature && studentClass.requestedFeature != null) {
-            if (!room.features.containsKey(studentClass.requestedFeature) || room.features[studentClass.requestedFeature]!!.isEmpty()) {
-                return false
-            }
-        }
-
-        return true
     }
 }
