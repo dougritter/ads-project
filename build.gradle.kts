@@ -27,6 +27,9 @@ dependencies {
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8")
     implementation("org.junit.jupiter:junit-jupiter:5.7.0")
+	implementation("org.uma.jmetal:jmetal:5.11")
+	implementation("org.uma.jmetal:jmetal-core:5.11")
+	implementation("org.uma.jmetal:jmetal-lab:5.11")
 }
 
 java {
