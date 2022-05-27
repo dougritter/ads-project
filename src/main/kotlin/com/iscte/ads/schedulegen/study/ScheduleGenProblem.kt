@@ -46,15 +46,20 @@ class ScheduleGenProblem(val lectures: List<StudentClass>,
                          val timeSlots: List<TimeSlot>): AbstractIntegerProblem() {
 
     override fun evaluate(solution: IntegerSolution?): IntegerSolution {
-        println("should evaluate solution $solution")
+        println("evaluate ${solution?.variables()}")
         return solution!!
+    }
+
+    override fun getName(): String {
+        return "scheduleProblem"
     }
 
     override fun createSolution(): IntegerSolution {
         val bounds = Bounds.create(0, timeSlots.size - 1)
         val newSolution = ScheduleIntegerSolution(lectures.size, 1, 0, mutableListOf(bounds))
-        repeat(lectures.size) { newSolution.variables()[it] =
-            JMetalRandom.getInstance().nextInt(bounds.lowerBound, bounds.upperBound) }
+        repeat(lectures.size) {
+            newSolution.variables().add(JMetalRandom.getInstance().nextInt(bounds.lowerBound, bounds.upperBound))
+        }
         return newSolution
     }
 

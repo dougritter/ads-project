@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-05-27T16:34:45.449678Z</date>
-  <millis>1653669285449</millis>
-  <nanos>678000</nanos>
+  <date>2022-05-27T17:55:30.047868Z</date>
+  <millis>1653674130047</millis>
+  <nanos>868000</nanos>
   <sequence>0</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>Loggers configured with null</message>
 </record>
 <record>
-  <date>2022-05-27T16:34:45.459484Z</date>
-  <millis>1653669285459</millis>
-  <nanos>484000</nanos>
+  <date>2022-05-27T17:55:30.060291Z</date>
+  <millis>1653674130060</millis>
+  <nanos>291000</nanos>
   <sequence>1</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -26,9 +26,9 @@
   <message>ExecuteAlgorithms: Preparing output directory</message>
 </record>
 <record>
-  <date>2022-05-27T16:34:45.468300Z</date>
-  <millis>1653669285468</millis>
-  <nanos>300000</nanos>
+  <date>2022-05-27T17:55:30.070906Z</date>
+  <millis>1653674130070</millis>
+  <nanos>906000</nanos>
   <sequence>2</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -38,723 +38,135 @@
   <message>ExecuteAlgorithms: there are 5 runs pending</message>
 </record>
 <record>
-  <date>2022-05-27T16:34:45.473206Z</date>
-  <millis>1653669285473</millis>
-  <nanos>206000</nanos>
+  <date>2022-05-27T17:55:30.076659Z</date>
+  <millis>1653674130076</millis>
+  <nanos>659000</nanos>
   <sequence>3</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>16</thread>
-  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null</message>
+  <thread>19</thread>
+  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem</message>
 </record>
 <record>
-  <date>2022-05-27T16:34:45.473814Z</date>
-  <millis>1653669285473</millis>
-  <nanos>814000</nanos>
+  <date>2022-05-27T17:55:30.077189Z</date>
+  <millis>1653674130077</millis>
+  <nanos>189000</nanos>
   <sequence>4</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>SEVERE</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>19</thread>
-  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null failed</message>
+  <thread>17</thread>
+  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem failed</message>
 </record>
 <record>
-  <date>2022-05-27T16:34:45.473841Z</date>
-  <millis>1653669285473</millis>
-  <nanos>841000</nanos>
+  <date>2022-05-27T17:55:30.077303Z</date>
+  <millis>1653674130077</millis>
+  <nanos>303000</nanos>
   <sequence>7</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>SEVERE</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>17</thread>
-  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null failed</message>
+  <thread>16</thread>
+  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem failed</message>
 </record>
 <record>
-  <date>2022-05-27T16:34:45.473840Z</date>
-  <millis>1653669285473</millis>
-  <nanos>840000</nanos>
+  <date>2022-05-27T17:55:30.077242Z</date>
+  <millis>1653674130077</millis>
+  <nanos>242000</nanos>
   <sequence>6</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>SEVERE</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>1</thread>
-  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null failed</message>
+  <thread>18</thread>
+  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem failed</message>
 </record>
 <record>
-  <date>2022-05-27T16:34:45.473816Z</date>
-  <millis>1653669285473</millis>
-  <nanos>816000</nanos>
+  <date>2022-05-27T17:55:30.077191Z</date>
+  <millis>1653674130077</millis>
+  <nanos>191000</nanos>
   <sequence>5</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>SEVERE</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>18</thread>
-  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null failed</message>
+  <thread>1</thread>
+  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem failed</message>
 </record>
 <record>
-  <date>2022-05-27T16:34:45.477002Z</date>
-  <millis>1653669285477</millis>
-  <nanos>2000</nanos>
+  <date>2022-05-27T17:55:30.081026Z</date>
+  <millis>1653674130081</millis>
+  <nanos>26000</nanos>
   <sequence>8</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>18</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 0, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN0.csv</message>
+  <thread>19</thread>
+  <message> Running algorithm: NSGAIIa, problem: scheduleProblem, run: 0, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem/FUN0.csv</message>
 </record>
 <record>
-  <date>2022-05-27T16:34:45.477126Z</date>
-  <millis>1653669285477</millis>
-  <nanos>126000</nanos>
+  <date>2022-05-27T17:55:30.081122Z</date>
+  <millis>1653674130081</millis>
+  <nanos>122000</nanos>
   <sequence>12</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>1</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 2, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN2.csv</message>
+  <thread>17</thread>
+  <message> Running algorithm: NSGAIIa, problem: scheduleProblem, run: 4, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem/FUN4.csv</message>
 </record>
 <record>
-  <date>2022-05-27T16:34:45.477071Z</date>
-  <millis>1653669285477</millis>
-  <nanos>71000</nanos>
+  <date>2022-05-27T17:55:30.081036Z</date>
+  <millis>1653674130081</millis>
+  <nanos>36000</nanos>
   <sequence>11</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
   <thread>16</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 1, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN1.csv</message>
+  <message> Running algorithm: NSGAIIa, problem: scheduleProblem, run: 1, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem/FUN1.csv</message>
 </record>
 <record>
-  <date>2022-05-27T16:34:45.477002Z</date>
-  <millis>1653669285477</millis>
-  <nanos>2000</nanos>
-  <sequence>9</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>17</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 4, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN4.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.477019Z</date>
-  <millis>1653669285477</millis>
-  <nanos>19000</nanos>
+  <date>2022-05-27T17:55:30.081027Z</date>
+  <millis>1653674130081</millis>
+  <nanos>27000</nanos>
   <sequence>10</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>19</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 3, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN3.csv</message>
+  <thread>18</thread>
+  <message> Running algorithm: NSGAIIa, problem: scheduleProblem, run: 3, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem/FUN3.csv</message>
 </record>
 <record>
-  <date>2022-05-27T16:34:45.478632Z</date>
-  <millis>1653669285478</millis>
-  <nanos>632000</nanos>
+  <date>2022-05-27T17:55:30.081026Z</date>
+  <millis>1653674130081</millis>
+  <nanos>26000</nanos>
+  <sequence>9</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
+  <method>runAlgorithm</method>
+  <thread>1</thread>
+  <message> Running algorithm: NSGAIIa, problem: scheduleProblem, run: 2, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem/FUN2.csv</message>
+</record>
+<record>
+  <date>2022-05-27T17:58:56.873754Z</date>
+  <millis>1653674336873</millis>
+  <nanos>754000</nanos>
   <sequence>13</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>16</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN1.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.478771Z</date>
-  <millis>1653669285478</millis>
-  <nanos>771000</nanos>
-  <sequence>17</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>1</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN2.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.478633Z</date>
-  <millis>1653669285478</millis>
-  <nanos>633000</nanos>
-  <sequence>14</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>17</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN4.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.478658Z</date>
-  <millis>1653669285478</millis>
-  <nanos>658000</nanos>
-  <sequence>15</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>18</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN0.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.478677Z</date>
-  <millis>1653669285478</millis>
-  <nanos>677000</nanos>
-  <sequence>16</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>19</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN3.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.479886Z</date>
-  <millis>1653669285479</millis>
-  <nanos>886000</nanos>
-  <sequence>18</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.lab.experiment.component.impl.ExecuteAlgorithms</class>
   <method>run</method>
   <thread>1</thread>
-  <message>ExecuteAlgorithms: there are 5 runs pending</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.480324Z</date>
-  <millis>1653669285480</millis>
-  <nanos>324000</nanos>
-  <sequence>19</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>1</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 2, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN2.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.480381Z</date>
-  <millis>1653669285480</millis>
-  <nanos>381000</nanos>
-  <sequence>23</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>16</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 0, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN0.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.480344Z</date>
-  <millis>1653669285480</millis>
-  <nanos>344000</nanos>
-  <sequence>22</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>17</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 3, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN3.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.480343Z</date>
-  <millis>1653669285480</millis>
-  <nanos>343000</nanos>
-  <sequence>21</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>19</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 4, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN4.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.480334Z</date>
-  <millis>1653669285480</millis>
-  <nanos>334000</nanos>
-  <sequence>20</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>18</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 1, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN1.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.481189Z</date>
-  <millis>1653669285481</millis>
-  <nanos>189000</nanos>
-  <sequence>24</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>17</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN3.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.481227Z</date>
-  <millis>1653669285481</millis>
-  <nanos>227000</nanos>
-  <sequence>25</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>16</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN0.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.481380Z</date>
-  <millis>1653669285481</millis>
-  <nanos>380000</nanos>
-  <sequence>26</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>19</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN4.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.481404Z</date>
-  <millis>1653669285481</millis>
-  <nanos>404000</nanos>
-  <sequence>27</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>1</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN2.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.481830Z</date>
-  <millis>1653669285481</millis>
-  <nanos>830000</nanos>
-  <sequence>28</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>18</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN1.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.482518Z</date>
-  <millis>1653669285482</millis>
-  <nanos>518000</nanos>
-  <sequence>29</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.component.impl.ExecuteAlgorithms</class>
-  <method>run</method>
-  <thread>1</thread>
-  <message>ExecuteAlgorithms: there are 5 runs pending</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.482756Z</date>
-  <millis>1653669285482</millis>
-  <nanos>756000</nanos>
-  <sequence>30</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>1</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 2, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN2.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.482815Z</date>
-  <millis>1653669285482</millis>
-  <nanos>815000</nanos>
-  <sequence>34</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>17</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 3, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN3.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.482809Z</date>
-  <millis>1653669285482</millis>
-  <nanos>809000</nanos>
-  <sequence>33</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>20</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 4, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN4.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.482774Z</date>
-  <millis>1653669285482</millis>
-  <nanos>774000</nanos>
-  <sequence>32</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>19</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 0, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN0.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.482768Z</date>
-  <millis>1653669285482</millis>
-  <nanos>768000</nanos>
-  <sequence>31</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>16</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 1, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN1.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.482975Z</date>
-  <millis>1653669285482</millis>
-  <nanos>975000</nanos>
-  <sequence>35</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>1</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN2.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.483767Z</date>
-  <millis>1653669285483</millis>
-  <nanos>767000</nanos>
-  <sequence>36</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>16</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN1.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.483840Z</date>
-  <millis>1653669285483</millis>
-  <nanos>840000</nanos>
-  <sequence>38</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>17</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN3.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.483807Z</date>
-  <millis>1653669285483</millis>
-  <nanos>807000</nanos>
-  <sequence>37</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>20</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN4.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.484509Z</date>
-  <millis>1653669285484</millis>
-  <nanos>509000</nanos>
-  <sequence>39</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>19</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN0.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.484817Z</date>
-  <millis>1653669285484</millis>
-  <nanos>817000</nanos>
-  <sequence>40</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.component.impl.ExecuteAlgorithms</class>
-  <method>run</method>
-  <thread>1</thread>
-  <message>ExecuteAlgorithms: there are 5 runs pending</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.485100Z</date>
-  <millis>1653669285485</millis>
-  <nanos>100000</nanos>
-  <sequence>41</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>1</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 2, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN2.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.485190Z</date>
-  <millis>1653669285485</millis>
-  <nanos>190000</nanos>
-  <sequence>44</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>16</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 1, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN1.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.485145Z</date>
-  <millis>1653669285485</millis>
-  <nanos>145000</nanos>
-  <sequence>43</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>19</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 4, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN4.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.485133Z</date>
-  <millis>1653669285485</millis>
-  <nanos>133000</nanos>
-  <sequence>42</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>18</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 3, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN3.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.485330Z</date>
-  <millis>1653669285485</millis>
-  <nanos>330000</nanos>
-  <sequence>46</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>1</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN2.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.485230Z</date>
-  <millis>1653669285485</millis>
-  <nanos>230000</nanos>
-  <sequence>45</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>20</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 0, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN0.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.485500Z</date>
-  <millis>1653669285485</millis>
-  <nanos>500000</nanos>
-  <sequence>47</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>16</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN1.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.486219Z</date>
-  <millis>1653669285486</millis>
-  <nanos>219000</nanos>
-  <sequence>48</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>19</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN4.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.486246Z</date>
-  <millis>1653669285486</millis>
-  <nanos>246000</nanos>
-  <sequence>49</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>20</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN0.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.486682Z</date>
-  <millis>1653669285486</millis>
-  <nanos>682000</nanos>
-  <sequence>50</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>18</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN3.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.486936Z</date>
-  <millis>1653669285486</millis>
-  <nanos>936000</nanos>
-  <sequence>51</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.component.impl.ExecuteAlgorithms</class>
-  <method>run</method>
-  <thread>1</thread>
-  <message>ExecuteAlgorithms: there are 5 runs pending</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.487157Z</date>
-  <millis>1653669285487</millis>
-  <nanos>157000</nanos>
-  <sequence>52</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>1</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 2, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN2.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.487218Z</date>
-  <millis>1653669285487</millis>
-  <nanos>218000</nanos>
-  <sequence>56</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>18</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 0, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN0.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.487190Z</date>
-  <millis>1653669285487</millis>
-  <nanos>190000</nanos>
-  <sequence>54</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>16</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 4, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN4.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.487192Z</date>
-  <millis>1653669285487</millis>
-  <nanos>192000</nanos>
-  <sequence>55</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>20</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 3, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN3.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.487179Z</date>
-  <millis>1653669285487</millis>
-  <nanos>179000</nanos>
-  <sequence>53</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>19</thread>
-  <message> Running algorithm: NSGAIIa, problem: null, run: 1, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN1.csv</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.487685Z</date>
-  <millis>1653669285487</millis>
-  <nanos>685000</nanos>
-  <sequence>57</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>1</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN2.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.487733Z</date>
-  <millis>1653669285487</millis>
-  <nanos>733000</nanos>
-  <sequence>58</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>16</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN4.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.488134Z</date>
-  <millis>1653669285488</millis>
-  <nanos>134000</nanos>
-  <sequence>59</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>20</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN3.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.488425Z</date>
-  <millis>1653669285488</millis>
-  <nanos>425000</nanos>
-  <sequence>60</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>18</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN0.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.488691Z</date>
-  <millis>1653669285488</millis>
-  <nanos>691000</nanos>
-  <sequence>61</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>WARNING</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>19</thread>
-  <message>Execution failed: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/null/FUN1.csv has not been created.</message>
-</record>
-<record>
-  <date>2022-05-27T16:34:45.489070Z</date>
-  <millis>1653669285489</millis>
-  <nanos>70000</nanos>
-  <sequence>62</sequence>
-  <logger>org.uma.jmetal.util.JMetalLogger</logger>
-  <level>SEVERE</level>
-  <class>org.uma.jmetal.lab.experiment.component.impl.ExecuteAlgorithms</class>
-  <method>run</method>
-  <thread>1</thread>
-  <message>There are unfinished tasks after 5 tries</message>
+  <message>Algorithm runs finished. Number of tries: 1</message>
 </record>
 </log>

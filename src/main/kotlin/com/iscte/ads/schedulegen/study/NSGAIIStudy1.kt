@@ -84,8 +84,8 @@ object NSGAIIStudy2 {
         // A diretoria tem de existir, não é criada pelo jMetal
         Files.createDirectories(Paths.get("resources/referenceFrontsCSV"))
         ExecuteAlgorithms(experiment).run()
-        GenerateReferenceParetoSetAndFrontFromDoubleSolutions(experiment).run()
-        ComputeQualityIndicators(experiment).run()
+//        GenerateReferenceParetoSetAndFrontFromDoubleSolutions(experiment).run()
+//        ComputeQualityIndicators(experiment).run()
     }
 
     fun configureAlgorithmList(problemList: List<ExperimentProblem<IntegerSolution>>): MutableList<ExperimentAlgorithm<IntegerSolution, List<IntegerSolution>>> {
