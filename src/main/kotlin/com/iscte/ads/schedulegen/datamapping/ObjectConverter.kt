@@ -3,6 +3,7 @@ package com.iscte.ads.schedulegen.datamapping
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jdk8.Jdk8Module
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.iscte.ads.schedulegen.schedule.Event
 import org.springframework.stereotype.Service
 
@@ -18,6 +19,16 @@ class ObjectConverter {
 
     fun convertToJson(arrayOfEvents: Array<Event>): String {
         return mapper.writeValueAsString(arrayOfEvents)
+    }
+
+    fun normalizeTimeSlotsCSV(csv: String): String {
+        var result = csv
+        result = result.replaceFirst("Dia", "day")
+        result = result.replaceFirst("Hora", "time")
+        result = result.replaceFirst("Periodo", "period")
+        result = result.replace(",", "-")
+        result = result.replace(";", ",")
+        return result
     }
 
     fun normalizeClassesCSV(csv: String): String {

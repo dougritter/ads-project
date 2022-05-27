@@ -2,6 +2,7 @@ package com.iscte.ads.schedulegen.study
 
 import com.iscte.ads.schedulegen.schedule.Slot
 import com.iscte.ads.schedulegen.schedule.StudentClass
+import com.iscte.ads.schedulegen.schedule.TimeSlot
 import org.uma.jmetal.problem.integerproblem.impl.AbstractIntegerProblem
 import org.uma.jmetal.solution.Solution
 import org.uma.jmetal.solution.integersolution.IntegerSolution
@@ -42,7 +43,7 @@ class ScheduleIntegerSolution(private val numberOfVariables: Int,
 }
 
 class ScheduleGenProblem(val lectures: List<StudentClass>,
-                         val timeSlots: List<Slot>): AbstractIntegerProblem() {
+                         val timeSlots: List<TimeSlot>): AbstractIntegerProblem() {
 
     override fun evaluate(solution: IntegerSolution?): IntegerSolution {
         println("should evaluate solution $solution")

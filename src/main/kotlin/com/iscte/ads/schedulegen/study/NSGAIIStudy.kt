@@ -1,5 +1,9 @@
 package com.iscte.ads.schedulegen.study
 
+import com.iscte.ads.schedulegen.datamapping.ObjectConverter
+import com.iscte.ads.schedulegen.room.RoomsGatewayImplementation
+import com.iscte.ads.schedulegen.schedule.StudentClass
+import com.iscte.ads.schedulegen.schedule.TimeSlot
 import org.uma.jmetal.algorithm.Algorithm
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder
 import org.uma.jmetal.lab.experiment.ExperimentBuilder
@@ -8,13 +12,10 @@ import org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm
 import org.uma.jmetal.lab.experiment.util.ExperimentProblem
 import org.uma.jmetal.operator.crossover.impl.SBXCrossover
 import org.uma.jmetal.operator.mutation.impl.PolynomialMutation
-import org.uma.jmetal.problem.multiobjective.MultiobjectiveTSP
 import org.uma.jmetal.problem.multiobjective.zdt.*
 import org.uma.jmetal.qualityindicator.impl.*
 import org.uma.jmetal.qualityindicator.impl.hypervolume.impl.PISAHypervolume
 import org.uma.jmetal.solution.doublesolution.DoubleSolution
-import org.uma.jmetal.util.errorchecking.JMetalException
-import java.io.File
 import java.io.IOException
 import java.util.*
 
@@ -23,6 +24,25 @@ object NSGAIIStudy {
     @Throws(IOException::class)
     @JvmStatic
     fun main(args: Array<String>) {
+
+        val objectConverter = ObjectConverter()
+        val gateway = RoomsGatewayImplementation(objectConverter)
+
+        val classesCsv = NSGAIIStudy::class.java.getResource("/horario-semestre1-vazio.csv")?.readText()
+
+        if (classesCsv == null) {
+            println("lectures file content is null - returning")
+            return
+        }
+        val lectures: List<StudentClass> = gateway.convertFromClassesCsv(classesCsv)
+
+        val timeSlotsCsv = NSGAIIStudy::class.java.getResource("/time-slots-all.csv")?.readText()
+        if (timeSlotsCsv == null) {
+            println("time slots file content is null - returning")
+            return
+        }
+
+        val timeSlots: List<TimeSlot> = gateway.convertFromTimeSlotsCsv(timeSlotsCsv)
 
 //        if (args.size != 1) {
 //            throw JMetalException("Missing argument: experimentBaseDirectory")

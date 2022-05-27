@@ -4,6 +4,7 @@ import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
 import com.iscte.ads.schedulegen.schedule.Event
 import com.iscte.ads.schedulegen.datamapping.ObjectConverter
 import com.iscte.ads.schedulegen.schedule.StudentClass
+import com.iscte.ads.schedulegen.schedule.TimeSlot
 import org.springframework.stereotype.Service
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -73,6 +74,18 @@ class RoomsGatewayImplementation(val objectConverter: ObjectConverter) {
         return rooms
     }
 
+    private fun mapToTimeSlots(timeSlotsLit: List<Map<String, String>>): MutableList<TimeSlot> {
+        val timeSlots = mutableListOf<TimeSlot>()
+
+        timeSlotsLit.forEach {
+            timeSlots.add(TimeSlot(day = it["day"].orEmpty(),
+                time = it["time"].orEmpty(),
+                period = it["period"]?.toInt() ?: -1))
+        }
+
+        return timeSlots
+    }
+
     fun convertFromRoomsCsv(roomsCsv: String): MutableList<Room> {
         val contentsCSV = objectConverter.normalizeRoomsCSV(roomsCsv)
         val roomsMap = csvReader().readAllWithHeader(contentsCSV)
@@ -83,6 +96,12 @@ class RoomsGatewayImplementation(val objectConverter: ObjectConverter) {
         val contentsCSV = objectConverter.normalizeClassesCSV(classesCsv)
         val classes = csvReader().readAllWithHeader(contentsCSV)
         return mapToClasses(classes)
+    }
+
+    fun convertFromTimeSlotsCsv(timeSlots: String): MutableList<TimeSlot> {
+        val contentsCSV = objectConverter.normalizeTimeSlotsCSV(timeSlots)
+        val timeSlotsList = csvReader().readAllWithHeader(contentsCSV)
+        return mapToTimeSlots(timeSlotsList)
     }
 
     fun convertToJson(arrayOfEvents: Array<Event>): String {
