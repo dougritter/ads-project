@@ -10,5 +10,6 @@ data class StudentClass(
         val subscribersCount: Int,
         val startTime: LocalDateTime? = null,
         val endTime: LocalDateTime? = null,
-        val requestedFeature: String? = null
+        val requestedFeature: String? = null,
+        val slots: Int = 0
 )

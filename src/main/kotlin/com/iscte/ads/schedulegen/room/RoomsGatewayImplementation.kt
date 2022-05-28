@@ -19,6 +19,7 @@ class RoomsGatewayImplementation(val objectConverter: ObjectConverter) {
         for (item in classesList) {
             val subscribersCount = item["subscribersCount"].orEmpty()
             val requestedFeature = item["Características da sala pedida para a aula"].orEmpty()
+            val slots = item["slots"].orEmpty()
 
             var startTime: LocalDateTime? = null
             var endTime: LocalDateTime? = null
@@ -40,7 +41,8 @@ class RoomsGatewayImplementation(val objectConverter: ObjectConverter) {
                     subscribersCount =  if (subscribersCount.isNotEmpty()) subscribersCount.toInt() else 0,
                     startTime = startTime,
                     endTime = endTime,
-                    requestedFeature = requestedFeature.ifEmpty { null }
+                    requestedFeature = requestedFeature.ifEmpty { null },
+                    slots = slots.toInt()
             ))
         }
 

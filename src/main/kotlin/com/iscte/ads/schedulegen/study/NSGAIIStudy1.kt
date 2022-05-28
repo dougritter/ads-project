@@ -18,9 +18,7 @@ import org.apache.commons.io.FileUtils;
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder;
 import org.uma.jmetal.lab.experiment.Experiment;
 import org.uma.jmetal.lab.experiment.ExperimentBuilder;
-import org.uma.jmetal.lab.experiment.component.impl.ComputeQualityIndicators;
 import org.uma.jmetal.lab.experiment.component.impl.ExecuteAlgorithms;
-import org.uma.jmetal.lab.experiment.component.impl.GenerateReferenceParetoSetAndFrontFromDoubleSolutions;
 import org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm;
 import org.uma.jmetal.lab.experiment.util.ExperimentProblem;
 import org.uma.jmetal.qualityindicator.impl.NormalizedHypervolume;
@@ -28,7 +26,7 @@ import org.uma.jmetal.qualityindicator.impl.Spread;
 
 
 object NSGAIIStudy2 {
-    private const val INDEPENDENT_RUNS = 5
+    private const val INDEPENDENT_RUNS = 1
     @Throws(IOException::class)
     @JvmStatic
     fun main(args: Array<String>) {
@@ -56,7 +54,7 @@ object NSGAIIStudy2 {
         val experimentBaseDirectory = "experimentBaseDirectory"
 
         // Apagar os dados da simulação anterior, não é feito pelo jMetal
-        FileUtils.deleteDirectory(File("experimentBaseDirectory"))
+        FileUtils.deleteDirectory(File(experimentBaseDirectory))
         val problemList: List<ExperimentProblem<IntegerSolution>> = listOf(ExperimentProblem(scheduleProblem))
 
         val algorithmList: MutableList<ExperimentAlgorithm<IntegerSolution, List<IntegerSolution>>> = configureAlgorithmList(problemList)
@@ -107,23 +105,4 @@ object NSGAIIStudy2 {
         }
         return algorithms
     }
-
-    /*
-    for (int run = 0; run < INDEPENDENT_RUNS; run++) {
-      for (int i = 0; i < problemList.size(); i++) {
-        Algorithm<List<DoubleSolution>> algorithm =
-            new NSGAIIBuilder<>(
-                    problemList.get(i).getProblem(),
-                    new SBXCrossover(1.0, 5),
-                    new PolynomialMutation(
-                        1.0 / problemList.get(i).getProblem().getNumberOfVariables(), 10.0),
-                    100)
-                .setMaxEvaluations(25000)
-                .build();
-        algorithms.add(new ExperimentAlgorithm<>(algorithm, "NSGAIIa", problemList.get(i), run));
-      }
-
-    }
-    return algorithms;
-     */
 }
