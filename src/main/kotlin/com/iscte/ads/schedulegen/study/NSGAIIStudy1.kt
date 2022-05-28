@@ -18,7 +18,10 @@ import org.apache.commons.io.FileUtils;
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder;
 import org.uma.jmetal.lab.experiment.Experiment;
 import org.uma.jmetal.lab.experiment.ExperimentBuilder;
+import org.uma.jmetal.lab.experiment.component.impl.ComputeQualityIndicators
 import org.uma.jmetal.lab.experiment.component.impl.ExecuteAlgorithms;
+import org.uma.jmetal.lab.experiment.component.impl.GenerateReferenceParetoFront
+import org.uma.jmetal.lab.experiment.component.impl.GenerateReferenceParetoSetAndFrontFromDoubleSolutions
 import org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm;
 import org.uma.jmetal.lab.experiment.util.ExperimentProblem;
 import org.uma.jmetal.qualityindicator.impl.NormalizedHypervolume;
@@ -82,8 +85,8 @@ object NSGAIIStudy2 {
         // A diretoria tem de existir, não é criada pelo jMetal
         Files.createDirectories(Paths.get("resources/referenceFrontsCSV"))
         ExecuteAlgorithms(experiment).run()
-//        GenerateReferenceParetoSetAndFrontFromDoubleSolutions(experiment).run()
-//        ComputeQualityIndicators(experiment).run()
+        GenerateReferenceParetoFront(experiment).run()
+        ComputeQualityIndicators(experiment).run()
     }
 
     fun configureAlgorithmList(problemList: List<ExperimentProblem<IntegerSolution>>): MutableList<ExperimentAlgorithm<IntegerSolution, List<IntegerSolution>>> {
