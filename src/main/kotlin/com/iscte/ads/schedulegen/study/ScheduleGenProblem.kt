@@ -46,8 +46,9 @@ class ScheduleIntegerSolution(private val numberOfVariables: Int,
 
 }
 
-class ScheduleGenProblem(val lectures: List<StudentClass>,
-                         val timeSlots: List<TimeSlot>): AbstractIntegerProblem() {
+class ScheduleGenProblem(
+    private val lectures: List<StudentClass>,
+    private val timeSlots: List<TimeSlot>): AbstractIntegerProblem() {
 
     private val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
 
@@ -109,7 +110,6 @@ class ScheduleGenProblem(val lectures: List<StudentClass>,
                                 // verify collision
                                 if (!other.endTime.isAfter(item.endTime)) {
                                     // Collision exists: other starts after the first one but ends before first one end
-                                    collisions.add(itemIndex)
                                     collisions.add(otherIndex)
                                 } else {
                                     // There is no collision, verify gap between lectures

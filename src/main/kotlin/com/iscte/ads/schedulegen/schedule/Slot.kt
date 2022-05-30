@@ -2,7 +2,10 @@ package com.iscte.ads.schedulegen.schedule
 
 import java.time.LocalTime
 
-data class TimeSlot(val day: String, val time: String, val period: Int)
+data class TimeSlot(val day: String,
+                    val time: String,
+                    val period: Int,
+                    val available: Boolean = true)
 
 //Dia; Hora; Periodo
 //Seg; 8:00; 1

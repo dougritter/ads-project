@@ -1,5 +1,6 @@
 package com.iscte.ads.schedulegen.schedule
 
+import com.iscte.ads.schedulegen.room.Room
 import java.time.LocalDateTime
 
 data class StudentClass(
@@ -11,5 +12,6 @@ data class StudentClass(
         val startTime: LocalDateTime? = null,
         val endTime: LocalDateTime? = null,
         val requestedFeature: String? = null,
-        val slots: Int = 0
+        val slots: Int = 0,
+        val room: Room? = null
 )

@@ -33,6 +33,7 @@ class ObjectConverter {
 
     fun normalizeClassesCSV(csv: String): String {
         var result = csv
+        result = result.replaceFirst("Dia da Semana", "day")
         result = result.replaceFirst("Curso", "course")
         result = result.replaceFirst("Unidade de execução", "executionUnit")
         result = result.replaceFirst("Turno", "shift")
@@ -42,6 +43,7 @@ class ObjectConverter {
 
         result = result.replaceFirst("Início", "startTime")
         result = result.replaceFirst("Fim", "endTime")
+        result = result.replaceFirst("Slots", "slots")
         result = result.replace(",", "-")
         result = result.replace(";", ",")
 

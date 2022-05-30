@@ -23,11 +23,11 @@ class RoomsGatewayImplementation(val objectConverter: ObjectConverter) {
 
             var startTime: LocalDateTime? = null
             var endTime: LocalDateTime? = null
-            val day = item["Dia"].orEmpty().replace("/", "-")
+            val day = item["day"].orEmpty().replace("/", "-")
 
-            if (day.isNotEmpty()) {
-                val startTimeString = "$day ${item["startTime"]}"
-                val endTimeString = "$day ${item["endTime"]}"
+            if (day.isNotEmpty() && item["startTime"] != null) {
+                val startTimeString = if (day.length < 5) "${convertToDateTime(day)} ${item["startTime"]}" else "$day ${item["startTime"]}"
+                val endTimeString = if (day.length < 5) "${convertToDateTime(day)} ${item["endTime"]}" else "$day ${item["endTime"]}"
 
                 startTime = LocalDateTime.parse(startTimeString, formatter)
                 endTime = LocalDateTime.parse(endTimeString, formatter)
@@ -108,5 +108,16 @@ class RoomsGatewayImplementation(val objectConverter: ObjectConverter) {
 
     fun convertToJson(arrayOfEvents: Array<Event>): String {
         return objectConverter.convertToJson(arrayOfEvents)
+    }
+
+    private fun convertToDateTime(dayString: String): String {
+        return when(dayString) {
+            "Seg" -> "21-09-2015"
+            "Ter" -> "22-09-2015"
+            "Qua" -> "23-09-2015"
+            "Qui" -> "24-09-2015"
+            "Sex" -> "25-09-2015"
+            else -> { "26-09-2015" }
+        }
     }
 }
