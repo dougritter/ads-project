@@ -21,8 +21,44 @@ class RoomAllocationProblem(private val lectures: List<StudentClass>,
     }
 
     override fun evaluate(solution: IntegerSolution?): IntegerSolution {
-        println("evaluate room allocation solution \n${solution?.variables()}")
-        return solution!!
+
+        // make a copy of the lectures array
+        // to apply a room to each one
+        val lecturesWithRooms = lectures.toMutableList()
+
+        // apply rooms to lectures
+        solution?.variables()?.forEachIndexed { index, element ->
+            // add the room to each class
+            if (element != -1) {
+                // -1 means that a room was not allocated
+                lecturesWithRooms.add(lectures[index].copy(room = rooms[element]))
+            }
+        }
+
+        // here, each lecture at `lecturesWithRooms`
+        // it is ready to be evaluated
+
+        var numberOfLecturesWithoutRoom = 0
+        var overbookingCases = 0
+        lecturesWithRooms.forEach { lecture ->
+
+            // verify number of lectures without a room
+            if (lecture.room == null) {
+                numberOfLecturesWithoutRoom++
+            } else {
+
+                // verify if room has enough capacity for the class
+                if (lecture.room.normalCapacity < lecture.subscribersCount) {
+                    overbookingCases++
+                }
+            }
+        }
+
+        // set evaluation
+        solution!!.objectives()[0] = 0.0 // update objective quality
+
+        println("evaluate room allocation solution \n${lecturesWithRooms}")
+        return solution
     }
 
     override fun createSolution(): IntegerSolution {

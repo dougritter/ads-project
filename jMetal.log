@@ -61,3 +61,4 @@
   <thread>1</thread>
   <message> Running algorithm: NSGAIIa, problem: roomAllocationProblem, run: 0, funFile: experimentBaseDirectory/NSGAIIRoomsStudy/data/NSGAIIa/roomAllocationProblem/FUN0.csv</message>
 </record>
+</log>
