@@ -1,10 +1,11 @@
 package com.iscte.ads.schedulegen.study
 
-import com.iscte.ads.schedulegen.schedule.Slot
 import com.iscte.ads.schedulegen.schedule.StudentClass
 import com.iscte.ads.schedulegen.schedule.TimeSlot
-import org.uma.jmetal.problem.integerproblem.impl.AbstractIntegerProblem
+import org.uma.jmetal.problem.doubleproblem.impl.AbstractDoubleProblem
 import org.uma.jmetal.solution.Solution
+import org.uma.jmetal.solution.doublesolution.DoubleSolution
+import org.uma.jmetal.solution.doublesolution.impl.DefaultDoubleSolution
 import org.uma.jmetal.solution.integersolution.IntegerSolution
 import org.uma.jmetal.util.bounds.Bounds
 import org.uma.jmetal.util.pseudorandom.JMetalRandom
@@ -48,11 +49,11 @@ class ScheduleIntegerSolution(private val numberOfVariables: Int,
 
 class ScheduleGenProblem(
     private val lectures: List<StudentClass>,
-    private val timeSlots: List<TimeSlot>): AbstractIntegerProblem() {
+    private val timeSlots: List<TimeSlot>): AbstractDoubleProblem() {
 
     private val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")
 
-    override fun evaluate(solution: IntegerSolution?): IntegerSolution {
+    override fun evaluate(solution: DoubleSolution?): DoubleSolution {
         val listCopy = lectures.toMutableList()
         var totalSum = 0.0
 
@@ -62,10 +63,10 @@ class ScheduleGenProblem(
         solution?.variables()?.forEachIndexed { index, timeSlotIndex ->
             totalSum += timeSlotIndex
 
-            val startSlot = timeSlots[timeSlotIndex]
+            val startSlot = timeSlots[timeSlotIndex.toInt()]
             val slotsRequired = listCopy[index].slots
             if (slotsRequired > 1 && timeSlots.size > timeSlotIndex + (listCopy[index].slots - 1)) {
-                val endSlot = timeSlots[timeSlotIndex + (listCopy[index].slots - 1)]
+                val endSlot = timeSlots[timeSlotIndex.toInt() + (listCopy[index].slots - 1)]
                 listCopy[index] = listCopy[index].copy(startTime = convertToDateTime(startSlot), endTime = convertToDateTime(endSlot))
 
                 // count errors of slots allocated in different days
@@ -79,6 +80,22 @@ class ScheduleGenProblem(
             }
         }
 
+        evaluateConstraints(solution!!, listCopy)
+
+        if (totalSum < 0.0) {
+            totalSum = 0.0
+        }
+
+        println("\nError lectures with slots in different days: $errorSlotsInDifferentDays " +
+                "\nQuality: $totalSum")
+
+        solution.objectives()[0] = totalSum
+        solution.objectives()[1] = if (lectures.size - errorSlotsInDifferentDays > 0) (lectures.size - errorSlotsInDifferentDays).toDouble() else 0.0
+
+        return solution
+    }
+
+    private fun evaluateConstraints(solution: DoubleSolution, lecturesCopy: MutableList<StudentClass>): DoubleSolution {
         // evaluate classes in the same day
         // hard constraint: different classes can't be at the same time (collision)
         // soft constraint: gaps between classes at the same day
@@ -88,12 +105,12 @@ class ScheduleGenProblem(
         val lecturesInWeekDays = mutableListOf<List<StudentClass>>()
 
         // Filter for classes that are in the same day as others
-        lecturesInWeekDays.add(listCopy.filter { it.startTime?.dayOfWeek == DayOfWeek.MONDAY })
-        lecturesInWeekDays.add(listCopy.filter { it.startTime?.dayOfWeek == DayOfWeek.TUESDAY })
-        lecturesInWeekDays.add(listCopy.filter { it.startTime?.dayOfWeek == DayOfWeek.WEDNESDAY })
-        lecturesInWeekDays.add(listCopy.filter { it.startTime?.dayOfWeek == DayOfWeek.THURSDAY })
-        lecturesInWeekDays.add(listCopy.filter { it.startTime?.dayOfWeek == DayOfWeek.FRIDAY })
-        lecturesInWeekDays.add(listCopy.filter { it.startTime?.dayOfWeek == DayOfWeek.SATURDAY })
+        lecturesInWeekDays.add(lecturesCopy.filter { it.startTime?.dayOfWeek == DayOfWeek.MONDAY })
+        lecturesInWeekDays.add(lecturesCopy.filter { it.startTime?.dayOfWeek == DayOfWeek.TUESDAY })
+        lecturesInWeekDays.add(lecturesCopy.filter { it.startTime?.dayOfWeek == DayOfWeek.WEDNESDAY })
+        lecturesInWeekDays.add(lecturesCopy.filter { it.startTime?.dayOfWeek == DayOfWeek.THURSDAY })
+        lecturesInWeekDays.add(lecturesCopy.filter { it.startTime?.dayOfWeek == DayOfWeek.FRIDAY })
+        lecturesInWeekDays.add(lecturesCopy.filter { it.startTime?.dayOfWeek == DayOfWeek.SATURDAY })
 
         lecturesInWeekDays.forEach { lecturesInTheSameDay ->
             lecturesInTheSameDay.forEachIndexed { itemIndex, item ->
@@ -126,16 +143,12 @@ class ScheduleGenProblem(
             }
         }
 
-        if (totalSum < 0.0) {
-            totalSum = 0.0
-        }
-
         println("\n\n\n\nevaluate " +
-                "\nError lectures with slots in different days: $errorSlotsInDifferentDays " +
                 "\nCollisions: ${collisions.size} " +
-                "\nGaps greater than 30min between lectures in the same day $gapsCount" +
-                "\nQuality: $totalSum")
-        solution!!.objectives()[0] = totalSum
+                "\nGaps greater than 30min between lectures in the same day $gapsCount")
+
+        solution.constraints()[0] = if (collisions.isNotEmpty()) 0.0 else 1.0
+        solution.constraints()[1] = if (lecturesCopy.size - gapsCount > 0) (lecturesCopy.size - gapsCount).toDouble() else 0.0
 
         return solution
     }
@@ -144,11 +157,15 @@ class ScheduleGenProblem(
         return "scheduleProblem"
     }
 
-    override fun createSolution(): IntegerSolution {
-        val bounds = Bounds.create(0, timeSlots.size - 1)
-        val newSolution = ScheduleIntegerSolution(lectures.size, 1, 0, mutableListOf(bounds))
+    override fun createSolution(): DoubleSolution {
+        val bounds = mutableListOf<Bounds<Double>>()
+        repeat(2000) {
+            bounds.add(Bounds.create(0.0, (timeSlots.size - 1).toDouble()))
+        }
+        val newSolution = ScheduleDoubleSolution(2, 2, bounds)
+        newSolution.variables().clear()
         repeat(lectures.size) {
-            newSolution.variables().add(JMetalRandom.getInstance().nextInt(bounds.lowerBound, bounds.upperBound))
+            newSolution.variables().add(JMetalRandom.getInstance().nextDouble(bounds.first().lowerBound, bounds.first().upperBound))
         }
         return newSolution
     }
@@ -165,4 +182,17 @@ class ScheduleGenProblem(
 
         return LocalDateTime.parse("$day ${timeSlot.time}", formatter)
     }
+}
+
+class ScheduleDoubleSolution(
+    numberOfObjectives: Int,
+    numberOfConstraints: Int,
+    boundsList: MutableList<Bounds<Double>>)
+    : DefaultDoubleSolution(numberOfObjectives, numberOfConstraints, boundsList) {
+
+    private val otherBounds = mutableListOf<Bounds<Double>>(Bounds.create(0.0, boundsList[0].upperBound))
+    override fun getBounds(index: Int): Bounds<Double> {
+        return otherBounds[0]
+    }
+
 }

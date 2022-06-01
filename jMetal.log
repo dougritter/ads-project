@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-06-01T18:20:31.220887Z</date>
-  <millis>1654107631220</millis>
-  <nanos>887000</nanos>
+  <date>2022-06-01T23:38:52.210006Z</date>
+  <millis>1654126732210</millis>
+  <nanos>6000</nanos>
   <sequence>0</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>Loggers configured with null</message>
 </record>
 <record>
-  <date>2022-06-01T18:20:31.234303Z</date>
-  <millis>1654107631234</millis>
-  <nanos>303000</nanos>
+  <date>2022-06-01T23:38:52.219560Z</date>
+  <millis>1654126732219</millis>
+  <nanos>560000</nanos>
   <sequence>1</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -26,63 +26,171 @@
   <message>ExecuteAlgorithms: Preparing output directory</message>
 </record>
 <record>
-  <date>2022-06-01T18:20:31.251943Z</date>
-  <millis>1654107631251</millis>
-  <nanos>943000</nanos>
+  <date>2022-06-01T23:38:52.229083Z</date>
+  <millis>1654126732229</millis>
+  <nanos>83000</nanos>
   <sequence>2</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.lab.experiment.component.impl.ExecuteAlgorithms</class>
   <method>run</method>
   <thread>1</thread>
-  <message>ExecuteAlgorithms: there are 2 runs pending</message>
+  <message>ExecuteAlgorithms: there are 1 runs pending</message>
 </record>
 <record>
-  <date>2022-06-01T18:20:31.263959Z</date>
-  <millis>1654107631263</millis>
-  <nanos>959000</nanos>
+  <date>2022-06-01T23:38:52.232805Z</date>
+  <millis>1654126732232</millis>
+  <nanos>805000</nanos>
   <sequence>3</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>19</thread>
+  <thread>1</thread>
   <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem</message>
 </record>
 <record>
-  <date>2022-06-01T18:20:31.263988Z</date>
-  <millis>1654107631263</millis>
-  <nanos>988000</nanos>
+  <date>2022-06-01T23:38:52.235684Z</date>
+  <millis>1654126732235</millis>
+  <nanos>684000</nanos>
   <sequence>4</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
   <thread>1</thread>
-  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/roomAllocationProblem</message>
+  <message> Running algorithm: NSGAIIa, problem: scheduleProblem, run: 0, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem/FUN0.csv</message>
 </record>
 <record>
-  <date>2022-06-01T18:20:31.268092Z</date>
-  <millis>1654107631268</millis>
-  <nanos>92000</nanos>
+  <date>2022-06-01T23:41:00.252024Z</date>
+  <millis>1654126860252</millis>
+  <nanos>24000</nanos>
   <sequence>5</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
+  <class>org.uma.jmetal.lab.experiment.component.impl.ExecuteAlgorithms</class>
+  <method>run</method>
   <thread>1</thread>
-  <message> Running algorithm: NSGAIIa, problem: roomAllocationProblem, run: 0, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/roomAllocationProblem/FUN0.csv</message>
+  <message>Algorithm runs finished. Number of tries: 1</message>
 </record>
 <record>
-  <date>2022-06-01T18:20:31.268158Z</date>
-  <millis>1654107631268</millis>
-  <nanos>158000</nanos>
+  <date>2022-06-01T23:41:00.278399Z</date>
+  <millis>1654126860278</millis>
+  <nanos>399000</nanos>
   <sequence>6</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
-  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
-  <method>runAlgorithm</method>
-  <thread>19</thread>
-  <message> Running algorithm: NSGAIIa, problem: scheduleProblem, run: 0, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem/FUN0.csv</message>
+  <class>org.uma.jmetal.lab.experiment.component.impl.ComputeQualityIndicators</class>
+  <method>resetFile</method>
+  <thread>1</thread>
+  <message>File experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem/SP does NOT exist.</message>
+</record>
+<record>
+  <date>2022-06-01T23:41:00.278870Z</date>
+  <millis>1654126860278</millis>
+  <nanos>870000</nanos>
+  <sequence>7</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.lab.experiment.component.impl.ComputeQualityIndicators</class>
+  <method>resetFile</method>
+  <thread>1</thread>
+  <message>File experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem/NHV does NOT exist.</message>
+</record>
+<record>
+  <date>2022-06-01T23:41:00.279093Z</date>
+  <millis>1654126860279</millis>
+  <nanos>93000</nanos>
+  <sequence>8</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.lab.experiment.component.impl.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>1</thread>
+  <message>Computing indicator: SP</message>
+</record>
+<record>
+  <date>2022-06-01T23:41:00.279400Z</date>
+  <millis>1654126860279</millis>
+  <nanos>400000</nanos>
+  <sequence>9</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.lab.experiment.component.impl.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>1</thread>
+  <message>RF: resources/referenceFrontsCSV/scheduleProblem.csv</message>
+</record>
+<record>
+  <date>2022-06-01T23:41:00.283493Z</date>
+  <millis>1654126860283</millis>
+  <nanos>493000</nanos>
+  <sequence>10</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.lab.experiment.component.impl.ComputeQualityIndicators</class>
+  <method>lambda$run$0</method>
+  <thread>1</thread>
+  <message>SP: 0.48348932766546143</message>
+</record>
+<record>
+  <date>2022-06-01T23:41:00.284297Z</date>
+  <millis>1654126860284</millis>
+  <nanos>297000</nanos>
+  <sequence>11</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.lab.experiment.component.impl.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>1</thread>
+  <message>Computing indicator: NHV</message>
+</record>
+<record>
+  <date>2022-06-01T23:41:00.284526Z</date>
+  <millis>1654126860284</millis>
+  <nanos>526000</nanos>
+  <sequence>12</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.lab.experiment.component.impl.ComputeQualityIndicators</class>
+  <method>run</method>
+  <thread>1</thread>
+  <message>RF: resources/referenceFrontsCSV/scheduleProblem.csv</message>
+</record>
+<record>
+  <date>2022-06-01T23:41:00.285129Z</date>
+  <millis>1654126860285</millis>
+  <nanos>129000</nanos>
+  <sequence>13</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.lab.experiment.component.impl.ComputeQualityIndicators</class>
+  <method>lambda$run$0</method>
+  <thread>1</thread>
+  <message>NHV: 0.0</message>
+</record>
+<record>
+  <date>2022-06-01T23:41:00.290562Z</date>
+  <millis>1654126860290</millis>
+  <nanos>562000</nanos>
+  <sequence>14</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.lab.experiment.component.impl.ComputeQualityIndicators</class>
+  <method>writeSummaryFile</method>
+  <thread>1</thread>
+  <message>Writing org.uma.jmetal.experiment summary file</message>
+</record>
+<record>
+  <date>2022-06-01T23:41:00.290911Z</date>
+  <millis>1654126860290</millis>
+  <nanos>911000</nanos>
+  <sequence>15</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.lab.experiment.component.impl.ComputeQualityIndicators</class>
+  <method>resetFile</method>
+  <thread>1</thread>
+  <message>File experimentBaseDirectory/NSGAIIStudy/QualityIndicatorSummary.csv does NOT exist.</message>
 </record>
 </log>
