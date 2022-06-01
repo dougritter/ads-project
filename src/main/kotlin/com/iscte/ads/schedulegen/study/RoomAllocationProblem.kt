@@ -10,6 +10,7 @@ import org.uma.jmetal.util.pseudorandom.JMetalRandom
 import java.time.DayOfWeek
 import java.time.format.DateTimeFormatter
 
+
 class RoomAllocationProblem(private val lectures: List<StudentClass>,
                             private val timeSlots: List<TimeSlot>,
                             private val rooms: List<Room>): AbstractIntegerProblem() {
@@ -21,10 +22,11 @@ class RoomAllocationProblem(private val lectures: List<StudentClass>,
     }
 
     override fun evaluate(solution: IntegerSolution?): IntegerSolution {
-
+        val f = DoubleArray(solution!!.objectives().size)
         // make a copy of the lectures array
         // to apply a room to each one
         val lecturesWithRooms = lectures.toMutableList()
+
 
         // apply rooms to lectures
         solution?.variables()?.forEachIndexed { index, element ->
@@ -39,6 +41,7 @@ class RoomAllocationProblem(private val lectures: List<StudentClass>,
         // it is ready to be evaluated
 
         var numberOfLecturesWithoutRoom = 0
+        var numberOfLectures = 0
         var overbookingCases = 0
         lecturesWithRooms.forEach { lecture ->
 
@@ -52,14 +55,20 @@ class RoomAllocationProblem(private val lectures: List<StudentClass>,
                     overbookingCases++
                 }
             }
+            numberOfLectures++
         }
 
         // set evaluation
-        solution!!.objectives()[0] = 0.0 // update objective quality
+        f[0] = (numberOfLecturesWithoutRoom/numberOfLectures).toDouble()
+        f[1] = (overbookingCases/numberOfLectures).toDouble()
+        // update objective quality 1 and 2
+        solution!!.objectives()[0] = f[0]
+        solution!!.objectives()[1] = f[1]
 
-        println("evaluate room allocation solution \n${lecturesWithRooms}")
+        println("evaluate room allocation solution \n${f[0]}, \n${f[1]} ")
         return solution
     }
+
 
     override fun createSolution(): IntegerSolution {
         val roomTimeSlots = mutableListOf<MutableList<TimeSlot>>()
@@ -69,7 +78,7 @@ class RoomAllocationProblem(private val lectures: List<StudentClass>,
         }
 
         val bounds = Bounds.create(0, rooms.size - 1)
-        val newSolution = ScheduleIntegerSolution(lectures.size, 1, 0, mutableListOf(bounds))
+        val newSolution = ScheduleIntegerSolution(lectures.size, 2, 0, mutableListOf(bounds))
 
         // run to find a random room for each lecture
         // matches the random room index with its list index

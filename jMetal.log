@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-05-30T19:42:53.840921Z</date>
-  <millis>1653939773840</millis>
-  <nanos>921000</nanos>
+  <date>2022-06-01T17:57:29.511387500Z</date>
+  <millis>1654106249511</millis>
+  <nanos>387500</nanos>
   <sequence>0</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>Loggers configured with null</message>
 </record>
 <record>
-  <date>2022-05-30T19:42:53.851111Z</date>
-  <millis>1653939773851</millis>
-  <nanos>111000</nanos>
+  <date>2022-06-01T17:57:29.535818700Z</date>
+  <millis>1654106249535</millis>
+  <nanos>818700</nanos>
   <sequence>1</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
@@ -26,39 +26,63 @@
   <message>ExecuteAlgorithms: Preparing output directory</message>
 </record>
 <record>
-  <date>2022-05-30T19:42:53.861756Z</date>
-  <millis>1653939773861</millis>
-  <nanos>756000</nanos>
+  <date>2022-06-01T17:57:29.558020600Z</date>
+  <millis>1654106249558</millis>
+  <nanos>20600</nanos>
   <sequence>2</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.lab.experiment.component.impl.ExecuteAlgorithms</class>
   <method>run</method>
   <thread>1</thread>
-  <message>ExecuteAlgorithms: there are 1 runs pending</message>
+  <message>ExecuteAlgorithms: there are 2 runs pending</message>
 </record>
 <record>
-  <date>2022-05-30T19:42:53.866043Z</date>
-  <millis>1653939773866</millis>
-  <nanos>43000</nanos>
+  <date>2022-06-01T17:57:29.574328100Z</date>
+  <millis>1654106249574</millis>
+  <nanos>328100</nanos>
   <sequence>3</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
-  <thread>1</thread>
-  <message>Creating experimentBaseDirectory/NSGAIIRoomsStudy/data/NSGAIIa/roomAllocationProblem</message>
+  <thread>20</thread>
+  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem</message>
 </record>
 <record>
-  <date>2022-05-30T19:42:53.869725Z</date>
-  <millis>1653939773869</millis>
-  <nanos>725000</nanos>
+  <date>2022-06-01T17:57:29.574739Z</date>
+  <millis>1654106249574</millis>
+  <nanos>739000</nanos>
   <sequence>4</sequence>
   <logger>org.uma.jmetal.util.JMetalLogger</logger>
   <level>INFO</level>
   <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
   <method>runAlgorithm</method>
   <thread>1</thread>
-  <message> Running algorithm: NSGAIIa, problem: roomAllocationProblem, run: 0, funFile: experimentBaseDirectory/NSGAIIRoomsStudy/data/NSGAIIa/roomAllocationProblem/FUN0.csv</message>
+  <message>Creating experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/roomAllocationProblem</message>
+</record>
+<record>
+  <date>2022-06-01T17:57:29.584831500Z</date>
+  <millis>1654106249584</millis>
+  <nanos>831500</nanos>
+  <sequence>6</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
+  <method>runAlgorithm</method>
+  <thread>20</thread>
+  <message> Running algorithm: NSGAIIa, problem: scheduleProblem, run: 0, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/scheduleProblem/FUN0.csv</message>
+</record>
+<record>
+  <date>2022-06-01T17:57:29.584831500Z</date>
+  <millis>1654106249584</millis>
+  <nanos>831500</nanos>
+  <sequence>5</sequence>
+  <logger>org.uma.jmetal.util.JMetalLogger</logger>
+  <level>INFO</level>
+  <class>org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm</class>
+  <method>runAlgorithm</method>
+  <thread>1</thread>
+  <message> Running algorithm: NSGAIIa, problem: roomAllocationProblem, run: 0, funFile: experimentBaseDirectory/NSGAIIStudy/data/NSGAIIa/roomAllocationProblem/FUN0.csv</message>
 </record>
 </log>

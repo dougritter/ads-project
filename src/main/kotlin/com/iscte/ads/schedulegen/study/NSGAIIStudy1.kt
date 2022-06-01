@@ -36,7 +36,8 @@ object NSGAIIStudy2 {
         val objectConverter = ObjectConverter()
         val gateway = RoomsGatewayImplementation(objectConverter)
 
-        val classesCsv = NSGAIIStudy::class.java.getResource("/horario-semestre1-vazio.csv")?.readText()
+        //val classesCsv = NSGAIIStudy::class.java.getResource("/horario-semestre1-vazio.csv")?.readText()
+        val classesCsv = NSGAIIStudy::class.java.getResource("/horario-semestre1.csv")?.readText()
 
         if (classesCsv == null) {
             println("lectures file content is null - returning")
@@ -60,15 +61,27 @@ object NSGAIIStudy2 {
         }
 
         val rooms: List<Room> = gateway.convertFromRoomsCsv(roomsCsv)
+        val classesWithTimeCsv = NSGAIIStudy::class.java.getResource("/horario-semestre1.csv")?.readText()
+
+        if (classesWithTimeCsv == null) {
+            println("lectures with times file content is null - returning")
+            return
+        }
+        val lecturesWithTime: List<StudentClass> = gateway.convertFromClassesCsv(classesWithTimeCsv)
 
         val scheduleProblem = ScheduleGenProblem(lectures, timeSlots)
-        val roomAllocationProblem = RoomAllocationProblem(lectures, timeSlots, rooms)
+        val roomAllocationProblem = RoomAllocationProblem(lecturesWithTime, timeSlots, rooms)
+
+
+        val problemList: List<ExperimentProblem<IntegerSolution>> = listOf(ExperimentProblem(scheduleProblem), ExperimentProblem(roomAllocationProblem))
+        //val problemList: List<ExperimentProblem<IntegerSolution>> = listOf(ExperimentProblem(roomAllocationProblem))
+        //val problemList: List<ExperimentProblem<IntegerSolution>> = listOf(ExperimentProblem(scheduleProblem))
 
         val experimentBaseDirectory = "experimentBaseDirectory"
 
         // Apagar os dados da simulação anterior, não é feito pelo jMetal
         FileUtils.deleteDirectory(File(experimentBaseDirectory))
-        val problemList: List<ExperimentProblem<IntegerSolution>> = listOf(ExperimentProblem(scheduleProblem), ExperimentProblem(roomAllocationProblem))
+        //Files.createDirectories(Paths.get(experimentBaseDirectory))
 
         val algorithmList: MutableList<ExperimentAlgorithm<IntegerSolution, List<IntegerSolution>>> = configureAlgorithmList(problemList)
         val experiment: Experiment<IntegerSolution, List<IntegerSolution>> =
