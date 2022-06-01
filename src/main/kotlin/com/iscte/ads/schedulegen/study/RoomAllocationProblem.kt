@@ -23,10 +23,10 @@ class RoomAllocationProblem(private val lectures: List<StudentClass>,
 
     override fun evaluate(solution: IntegerSolution?): IntegerSolution {
         val f = DoubleArray(solution!!.objectives().size)
+        println("evaluate room allocation solution \n${f[0]}, \n${f[1]} ")
         // make a copy of the lectures array
         // to apply a room to each one
         val lecturesWithRooms = lectures.toMutableList()
-
 
         // apply rooms to lectures
         solution?.variables()?.forEachIndexed { index, element ->
@@ -80,41 +80,44 @@ class RoomAllocationProblem(private val lectures: List<StudentClass>,
         val bounds = Bounds.create(0, rooms.size - 1)
         val newSolution = ScheduleIntegerSolution(lectures.size, 2, 0, mutableListOf(bounds))
 
-        // run to find a random room for each lecture
-        // matches the random room index with its list index
-        // verifies if the slots of the random room are available
-        // if not, generates a new random room index and try again
-        lectures.forEach { currentLecture ->
-            var randomRoomFound = false
-            while (!randomRoomFound) {
-                val randomRoom = JMetalRandom.getInstance().nextInt(bounds.lowerBound, bounds.upperBound)
+        try {
+            // run to find a random room for each lecture
+            // matches the random room index with its list index
+            // verifies if the slots of the random room are available
+            // if not, generates a new random room index and try again
+            lectures.forEach { currentLecture ->
+                var randomRoomFound = false
+                while (!randomRoomFound) {
+                    val randomRoom = JMetalRandom.getInstance().nextInt(bounds.lowerBound, bounds.upperBound)
 
-                // returning if there is no start time - impossible to check slots
-                if (currentLecture.startTime == null) {
-                    newSolution.variables().add(-1)
-                    randomRoomFound = true
-                    break
-                }
-
-                // verify if room time slots are available
-                val startTimeString = formatter.format(currentLecture.startTime)
-                val slotIndex = roomTimeSlots[randomRoom].indexOfFirst { it.time == startTimeString &&
-                        it.day == convertDayOfWeekToSlotDay(currentLecture.startTime.dayOfWeek) }
-
-                if (slotIndex != -1 && roomTimeSlots[randomRoom][slotIndex].available &&
-                    roomTimeSlots[randomRoom][slotIndex + currentLecture.slots-1].available) {
-                    // slots are available
-                    repeat(currentLecture.slots) {
-                        //set slots as unavailable for new allocations - hard constraint
-                        roomTimeSlots[randomRoom][slotIndex+(it)] = roomTimeSlots[randomRoom][slotIndex+(it)].copy(available = false)
+                    // returning if there is no start time - impossible to check slots
+                    if (currentLecture.startTime == null) {
+                        newSolution.variables().add(-1)
+                        randomRoomFound = true
+                        break
                     }
 
-                    randomRoomFound = true
-                    newSolution.variables().add(randomRoom)
+                    // verify if room time slots are available
+                    val startTimeString = formatter.format(currentLecture.startTime)
+                    val slotIndex = roomTimeSlots[randomRoom].indexOfFirst { it.time == startTimeString &&
+                            it.day == convertDayOfWeekToSlotDay(currentLecture.startTime.dayOfWeek) }
+
+                    if (slotIndex != -1 && roomTimeSlots[randomRoom][slotIndex].available &&
+                        roomTimeSlots[randomRoom][slotIndex + currentLecture.slots-1].available) {
+                        // slots are available
+                        repeat(currentLecture.slots) {
+                            //set slots as unavailable for new allocations - hard constraint
+                            roomTimeSlots[randomRoom][slotIndex+(it)] = roomTimeSlots[randomRoom][slotIndex+(it)].copy(available = false)
+                        }
+
+                        randomRoomFound = true
+                        newSolution.variables().add(randomRoom)
+                    }
                 }
             }
+        } catch (exception: Exception) {
+            println("exception in create new solution ${exception.message}")
         }
-
         return newSolution
     }
 
