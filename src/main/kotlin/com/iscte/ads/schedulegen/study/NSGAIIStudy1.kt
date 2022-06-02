@@ -6,23 +6,22 @@ import com.iscte.ads.schedulegen.room.RoomsGatewayImplementation
 import com.iscte.ads.schedulegen.schedule.StudentClass
 import com.iscte.ads.schedulegen.schedule.TimeSlot
 import org.apache.commons.io.FileUtils
+import org.uma.jmetal.algorithm.multiobjective.moead.MOEADBuilder
 import org.uma.jmetal.algorithm.multiobjective.nsgaii.NSGAIIBuilder
-import org.uma.jmetal.algorithm.multiobjective.nsgaiii.NSGAIIIBuilder
 import org.uma.jmetal.algorithm.multiobjective.smpso.SMPSOBuilder
 import org.uma.jmetal.lab.experiment.Experiment
 import org.uma.jmetal.lab.experiment.ExperimentBuilder
 import org.uma.jmetal.lab.experiment.component.impl.*
 import org.uma.jmetal.lab.experiment.util.ExperimentAlgorithm
 import org.uma.jmetal.lab.experiment.util.ExperimentProblem
-import org.uma.jmetal.operator.crossover.impl.IntegerSBXCrossover
 import org.uma.jmetal.operator.crossover.impl.SBXCrossover
-import org.uma.jmetal.operator.mutation.impl.IntegerPolynomialMutation
 import org.uma.jmetal.operator.mutation.impl.PolynomialMutation
+import org.uma.jmetal.problem.doubleproblem.DoubleProblem
 import org.uma.jmetal.qualityindicator.impl.NormalizedHypervolume
 import org.uma.jmetal.qualityindicator.impl.Spread
 import org.uma.jmetal.solution.doublesolution.DoubleSolution
-import org.uma.jmetal.solution.integersolution.IntegerSolution
-import org.uma.jmetal.utilities.GenerateReferenceFrontFromFile
+import org.uma.jmetal.util.archive.impl.CrowdingDistanceArchive
+import org.uma.jmetal.util.evaluator.impl.SequentialSolutionListEvaluator
 import java.io.File
 import java.io.IOException
 import java.nio.file.Files
@@ -105,8 +104,8 @@ object NSGAIIStudy2 {
         val roomAllocationProblem = RoomAllocationProblem(lecturesWithTime, timeSlotsForRooms, roomsForRoomsProblem)
 
 
-//        val problemList: List<ExperimentProblem<DoubleSolution>> = listOf(ExperimentProblem(scheduleProblem), ExperimentProblem(roomAllocationProblem))
-        val problemList: List<ExperimentProblem<DoubleSolution>> = listOf(ExperimentProblem(roomAllocationProblem))
+        val problemList: List<ExperimentProblem<DoubleSolution>> = listOf(ExperimentProblem(scheduleProblem), ExperimentProblem(roomAllocationProblem))
+//        val problemList: List<ExperimentProblem<DoubleSolution>> = listOf(ExperimentProblem(roomAllocationProblem))
 //        val problemList: List<ExperimentProblem<DoubleSolution>> = listOf(ExperimentProblem(scheduleProblem))
 
         val experimentBaseDirectory = "experimentBaseDirectory"
@@ -169,13 +168,51 @@ object NSGAIIStudy2 {
             }
 
 //            for (i in problemList.indices) {
+//                val mutationProbability = 1.0 / problemList[i].problem.numberOfVariables
+//                val mutationDistributionIndex = 20.0
+//                val algorithm = SMPSOBuilder(
+//                    problemList[i].problem as DoubleProblem,
+//                    CrowdingDistanceArchive(100)
+//                )
+//                    .setMutation(PolynomialMutation(mutationProbability, mutationDistributionIndex))
+//                    .setMaxIterations(250)
+//                    .setSwarmSize(100)
+//                    .setSolutionListEvaluator(SequentialSolutionListEvaluator())
+//                    .build()
+
+
+//                val algorithm = MOEADBuilder(problemList[i].problem, MOEADBuilder.Variant.MOEAD)
+//                    .setCrossover(SBXCrossover(1.0, 5.0))
+//                    .setMutation(PolynomialMutation(0.5, 10.0))
+//                    .setPopulationSize(100)
+//                    .build()
+
+                /*
+                public MOEADBuilder(Problem<DoubleSolution> problem, Variant variant) {
+                    this.problem = problem ;
+                    populationSize = 300 ;
+                    resultPopulationSize = 300 ;
+                    maxEvaluations = 150000 ;
+                    crossover = new DifferentialEvolutionCrossover() ;
+                    mutation = new PolynomialMutation(1.0/problem.getNumberOfVariables(), 20.0);
+                    functionType = MOEAD.FunctionType.TCHE ;
+                    neighborhoodSelectionProbability = 0.1 ;
+                    maximumNumberOfReplacedSolutions = 2 ;
+                    dataDirectory = "" ;
+                    neighborSize = 20 ;
+                    numberOfThreads = 1 ;
+                    moeadVariant = variant ;
+                  }
+                 */
+
+
 //                val algorithm = NSGAIIIBuilder(problemList[i].problem)
 //                    .setMaxIterations(250)
 //                    .setPopulationSize(100)
 //                    .setNumberOfDivisions(12)
 //                    .build()
-//
-//                val experimentAlgorithm = ExperimentAlgorithm(algorithm!!, "NSGAIII", problemList[i], run)
+
+//                val experimentAlgorithm = ExperimentAlgorithm(algorithm!!, "MOEAD", problemList[i], run)
 //                algorithms.add(experimentAlgorithm)
 //            }
         }

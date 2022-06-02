@@ -100,15 +100,19 @@ class RoomAllocationProblem(private val lectures: List<StudentClass>,
             } else {
                 // verify if room time slots are available
                 val startTimeString = formatter.format(currentLecture.startTime)
-                val slotIndex = roomTimeSlots[randomRoom.toInt()].indexOfFirst { it.time == startTimeString &&
-                        it.day == convertDayOfWeekToSlotDay(currentLecture.startTime.dayOfWeek) }
+                val slotIndex = roomTimeSlots[randomRoom.toInt()].indexOfFirst {
+                    it.time == startTimeString &&
+                            it.day == convertDayOfWeekToSlotDay(currentLecture.startTime.dayOfWeek)
+                }
 
                 if (slotIndex != -1 && roomTimeSlots[randomRoom.toInt()][slotIndex].available &&
-                    roomTimeSlots[randomRoom.toInt()][slotIndex + currentLecture.slots-1].available) {
+                    roomTimeSlots[randomRoom.toInt()][slotIndex + currentLecture.slots - 1].available
+                ) {
                     // slots are available
                     repeat(currentLecture.slots) {
                         //set slots as unavailable for new allocations - hard constraint
-                        roomTimeSlots[randomRoom.toInt()][slotIndex+(it)] = roomTimeSlots[randomRoom.toInt()][slotIndex+(it)].copy(available = false)
+                        roomTimeSlots[randomRoom.toInt()][slotIndex + (it)] =
+                            roomTimeSlots[randomRoom.toInt()][slotIndex + (it)].copy(available = false)
                     }
 
                     newSolution.variables().add(randomRoom)
@@ -116,9 +120,8 @@ class RoomAllocationProblem(private val lectures: List<StudentClass>,
                     newSolution.variables().add(-1.0)
                 }
             }
-        } catch (exception: Exception) {
-            println("exception in create new solution ${exception.message}")
         }
+
         return newSolution
     }
 
