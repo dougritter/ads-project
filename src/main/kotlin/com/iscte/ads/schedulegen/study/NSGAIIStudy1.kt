@@ -105,9 +105,9 @@ object NSGAIIStudy2 {
         val roomAllocationProblem = RoomAllocationProblem(lecturesWithTime, timeSlotsForRooms, roomsForRoomsProblem)
 
 
-//        val problemList: List<ExperimentProblem<IntegerSolution>> = listOf(ExperimentProblem(scheduleProblem), ExperimentProblem(roomAllocationProblem))
-//        val problemList: List<ExperimentProblem<IntegerSolution>> = listOf(ExperimentProblem(roomAllocationProblem))
-        val problemList: List<ExperimentProblem<DoubleSolution>> = listOf(ExperimentProblem(scheduleProblem))
+//        val problemList: List<ExperimentProblem<DoubleSolution>> = listOf(ExperimentProblem(scheduleProblem), ExperimentProblem(roomAllocationProblem))
+        val problemList: List<ExperimentProblem<DoubleSolution>> = listOf(ExperimentProblem(roomAllocationProblem))
+//        val problemList: List<ExperimentProblem<DoubleSolution>> = listOf(ExperimentProblem(scheduleProblem))
 
         val experimentBaseDirectory = "experimentBaseDirectory"
 
@@ -142,11 +142,11 @@ object NSGAIIStudy2 {
         ExecuteAlgorithms(experiment).run()
         GenerateReferenceParetoSetAndFrontFromDoubleSolutions(experiment).run()
         ComputeQualityIndicators(experiment).run()
-//
-//        GenerateLatexTablesWithStatistics(experiment).run()
-//        GenerateWilcoxonTestTablesWithR(experiment).run()
-//        GenerateFriedmanTestTables(experiment).run();
-//        GenerateBoxplotsWithR(experiment).run()
+
+        GenerateLatexTablesWithStatistics(experiment).run()
+        GenerateWilcoxonTestTablesWithR(experiment).run()
+        GenerateFriedmanTestTables(experiment).run();
+        GenerateBoxplotsWithR(experiment).run()
 //        GenerateHtmlPages(experiment).run()
     }
 

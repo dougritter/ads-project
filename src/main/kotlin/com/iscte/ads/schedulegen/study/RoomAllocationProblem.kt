@@ -3,7 +3,9 @@ package com.iscte.ads.schedulegen.study
 import com.iscte.ads.schedulegen.room.Room
 import com.iscte.ads.schedulegen.schedule.StudentClass
 import com.iscte.ads.schedulegen.schedule.TimeSlot
+import org.uma.jmetal.problem.doubleproblem.impl.AbstractDoubleProblem
 import org.uma.jmetal.problem.integerproblem.impl.AbstractIntegerProblem
+import org.uma.jmetal.solution.doublesolution.DoubleSolution
 import org.uma.jmetal.solution.integersolution.IntegerSolution
 import org.uma.jmetal.util.bounds.Bounds
 import org.uma.jmetal.util.pseudorandom.JMetalRandom
@@ -13,7 +15,7 @@ import java.time.format.DateTimeFormatter
 
 class RoomAllocationProblem(private val lectures: List<StudentClass>,
                             private val timeSlots: List<TimeSlot>,
-                            private val rooms: List<Room>): AbstractIntegerProblem() {
+                            private val rooms: List<Room>): AbstractDoubleProblem() {
 
     private val formatter = DateTimeFormatter.ofPattern("HH:mm")
 
@@ -21,7 +23,7 @@ class RoomAllocationProblem(private val lectures: List<StudentClass>,
         return "roomAllocationProblem"
     }
 
-    override fun evaluate(solution: IntegerSolution?): IntegerSolution {
+    override fun evaluate(solution: DoubleSolution?): DoubleSolution {
         val f = DoubleArray(solution!!.objectives().size)
         println("evaluate room allocation solution \n${f[0]}, \n${f[1]} ")
         // make a copy of the lectures array
@@ -31,9 +33,9 @@ class RoomAllocationProblem(private val lectures: List<StudentClass>,
         // apply rooms to lectures
         solution?.variables()?.forEachIndexed { index, element ->
             // add the room to each class
-            if (element != -1) {
+            if (element.toInt() != -1) {
                 // -1 means that a room was not allocated
-                lecturesWithRooms.add(lectures[index].copy(room = rooms[element]))
+                lecturesWithRooms.add(lectures[index].copy(room = rooms[element.toInt()]))
             }
         }
 
@@ -70,49 +72,48 @@ class RoomAllocationProblem(private val lectures: List<StudentClass>,
     }
 
 
-    override fun createSolution(): IntegerSolution {
+    override fun createSolution(): DoubleSolution {
         val roomTimeSlots = mutableListOf<MutableList<TimeSlot>>()
         // creates a list of slots for each room
         repeat(rooms.size) {
             roomTimeSlots.add(timeSlots.toMutableList())
         }
 
-        val bounds = Bounds.create(0, rooms.size - 1)
-        val newSolution = ScheduleIntegerSolution(lectures.size, 2, 0, mutableListOf(bounds))
+        val bounds = mutableListOf<Bounds<Double>>()
+        repeat(20000) {
+            bounds.add(Bounds.create(0.0, (rooms.size - 1).toDouble()))
+        }
 
-        try {
-            // run to find a random room for each lecture
-            // matches the random room index with its list index
-            // verifies if the slots of the random room are available
-            // if not, generates a new random room index and try again
-            lectures.forEach { currentLecture ->
-                var randomRoomFound = false
-                while (!randomRoomFound) {
-                    val randomRoom = JMetalRandom.getInstance().nextInt(bounds.lowerBound, bounds.upperBound)
+        val newSolution = ScheduleDoubleSolution(2, 2, bounds)
+        newSolution.variables().clear()
 
-                    // returning if there is no start time - impossible to check slots
-                    if (currentLecture.startTime == null) {
-                        newSolution.variables().add(-1)
-                        randomRoomFound = true
-                        break
+        // run to find a random room for each lecture
+        // matches the random room index with its list index
+        // verifies if the slots of the random room are available
+        // if not, generates a new random room index and try again
+        lectures.forEach { currentLecture ->
+            val randomRoom = JMetalRandom.getInstance().nextDouble(bounds.first().lowerBound, bounds.first().upperBound)
+
+            // returning if there is no start time - impossible to check slots
+            if (currentLecture.startTime == null) {
+                newSolution.variables().add(-1.0)
+            } else {
+                // verify if room time slots are available
+                val startTimeString = formatter.format(currentLecture.startTime)
+                val slotIndex = roomTimeSlots[randomRoom.toInt()].indexOfFirst { it.time == startTimeString &&
+                        it.day == convertDayOfWeekToSlotDay(currentLecture.startTime.dayOfWeek) }
+
+                if (slotIndex != -1 && roomTimeSlots[randomRoom.toInt()][slotIndex].available &&
+                    roomTimeSlots[randomRoom.toInt()][slotIndex + currentLecture.slots-1].available) {
+                    // slots are available
+                    repeat(currentLecture.slots) {
+                        //set slots as unavailable for new allocations - hard constraint
+                        roomTimeSlots[randomRoom.toInt()][slotIndex+(it)] = roomTimeSlots[randomRoom.toInt()][slotIndex+(it)].copy(available = false)
                     }
 
-                    // verify if room time slots are available
-                    val startTimeString = formatter.format(currentLecture.startTime)
-                    val slotIndex = roomTimeSlots[randomRoom].indexOfFirst { it.time == startTimeString &&
-                            it.day == convertDayOfWeekToSlotDay(currentLecture.startTime.dayOfWeek) }
-
-                    if (slotIndex != -1 && roomTimeSlots[randomRoom][slotIndex].available &&
-                        roomTimeSlots[randomRoom][slotIndex + currentLecture.slots-1].available) {
-                        // slots are available
-                        repeat(currentLecture.slots) {
-                            //set slots as unavailable for new allocations - hard constraint
-                            roomTimeSlots[randomRoom][slotIndex+(it)] = roomTimeSlots[randomRoom][slotIndex+(it)].copy(available = false)
-                        }
-
-                        randomRoomFound = true
-                        newSolution.variables().add(randomRoom)
-                    }
+                    newSolution.variables().add(randomRoom)
+                } else {
+                    newSolution.variables().add(-1.0)
                 }
             }
         } catch (exception: Exception) {
